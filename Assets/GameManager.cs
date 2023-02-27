@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     // Global Settings
-    [HideInInspector] public const float ARM_LENGTH = 5.0f;
+    [HideInInspector] public const float ARM_LENGTH = 1.0f;
 
     // Input Game Objetcs
     [SerializeField] private GameObject _player;
@@ -77,6 +77,9 @@ public class GameManager : MonoBehaviour
         Debug.Assert(_leftArm != null);
         Debug.Assert(_rightArm != null);
         Debug.Assert(_body != null);
+
+        // set initial values
+        Grab(_leftArm, new Vector2(0.0f, 0.0f));
     }
 
     // Update is called once per frame
@@ -109,5 +112,22 @@ public class GameManager : MonoBehaviour
       go.transform.position = center;
       go.transform.rotation = Quaternion.Euler(0, 0, angle);
       go.transform.localScale = new Vector3(1, length, 1);
+    }
+
+    void Grab(GameObject go, Vector2 position) {
+      // add HingeJoint2D to GameObject
+      HingeJoint2D joint = go.AddComponent<HingeJoint2D>();
+      joint.connectedBody = null;
+      joint.autoConfigureConnectedAnchor = false;
+      joint.anchor = position;
+      joint.connectedAnchor = position;
+      joint.enabled = true;
+    }
+
+    void Release(GameObject go) {
+      // remove HingeJoint2D from GameObject
+      HingeJoint2D joint = go.GetComponent<HingeJoint2D>();
+      joint.enabled = false;
+      // Destroy(joint);
     }
 }
