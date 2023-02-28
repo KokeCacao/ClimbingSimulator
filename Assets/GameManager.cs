@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     // Global Settings
-    [HideInInspector] public const float ARM_LENGTH = 1.0f;
+    [HideInInspector] public const float ARM_LENGTH = 2.0f;
 
     // Input Game Objetcs
     [SerializeField] private GameObject _player;
