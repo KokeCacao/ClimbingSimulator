@@ -47,21 +47,21 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""LeftArm"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""c49f4dae-dc5b-4a20-b5b7-9b3a53deb1e5"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""RightArm"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""9682efd7-e5bd-4c1f-8c7a-8887304d4f95"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
