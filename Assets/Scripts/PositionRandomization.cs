@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PositionRandomization : MonoBehaviour
 {
@@ -62,49 +63,50 @@ public class PositionRandomization : MonoBehaviour
     private Sprite rock17;
     [SerializeField]
     private Sprite rock18;
-    [SerializeField]
-    private Sprite[] rocks;
+
+    //public Sprite[] rocks;
 
     
     
-    Sprite[] rocksArray(){
-        rocks = new Sprite[18];
-        rocks[0] = rock1;
-        rocks[1] = rock2;
-        rocks[2] = rock3;
-        rocks[3] = rock4;
-        rocks[4] = rock5;
-        rocks[5] = rock6;
-        rocks[6] = rock7;
-        rocks[7] = rock8;
-        rocks[8] = rock9;
-        rocks[9] = rock10;
-        rocks[10] = rock11;
-        rocks[11] = rock12;
-        rocks[12] = rock13;
-        rocks[13] = rock14;
-        rocks[14] = rock15;
-        rocks[15] = rock16;
-        rocks[16] = rock17;
-        rocks[17] = rock18;
-        return rocks;
-    } 
+    // Sprite[] rocksArray(){
+    //     rocks = new Sprite[18];
+    //     rocks[0] = rock1;
+    //     rocks[1] = rock2;
+    //     rocks[2] = rock3;
+    //     rocks[3] = rock4;
+    //     rocks[4] = rock5;
+    //     rocks[5] = rock6;
+    //     rocks[6] = rock7;
+    //     rocks[7] = rock8;
+    //     rocks[8] = rock9;
+    //     rocks[9] = rock10;
+    //     rocks[10] = rock11;
+    //     rocks[11] = rock12;
+    //     rocks[12] = rock13;
+    //     rocks[13] = rock14;
+    //     rocks[14] = rock15;
+    //     rocks[15] = rock16;
+    //     rocks[16] = rock17;
+    //     rocks[17] = rock18;d
+    //     return rocks;
+    // } 
 
 
 
-    GameObject InstantiateRock(Sprite[] rocks){
-        GameObject rock = Instantiate(Rock);
-        int randomNum = Random.Range(0, rocks.Length);
-        Sprite randomrock = rocks[randomNum];
-        rock.GetComponent<Image>().sprite = randomrock;
-        return rock;
+    GameObject InstantiateRock(float x1, float x2, float y1, float y2){
+        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+        GameObject newRock = Instantiate(Rock);
+        newRock.transform.position = newpos;
+        //newRock.sprite = rock1;
+        //newRock.GetComponent<SpriteRenderer>().sprite = rock1;
+        return newRock;
     }
 
     // Start is called before the first frame update
     void Start()
     {
 
-        Sprite[] rocks = rocksArray();
+        ///Sprite[] rocks = rocksArray();
         int[] path_prev_col = new int[numpaths];
 
         int numrows  = (int)(totalheight/rowheight) + 1;
@@ -124,12 +126,14 @@ public class PositionRandomization : MonoBehaviour
 
             float x1 = x0 + (float)path_prev_col[p]*colwidth;
             float x2 = x1 + colwidth;
-            Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-            GameObject newRock = InstantiateRock(rocks);
-            newRock.transform.position = newpos;
+            GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+            // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+            // GameObject newRock = Instantiate(Rock);
+            // newRock.transform.position = newpos;
+            // //newRock.sprite = rock1;
+            // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
             // var cubeRenderer = newRock.GetComponent<Renderer>();
             // cubeRenderer.material.SetColor("_Color", Color.red);
-
         }
 
         //rest of rows create path from initial point
@@ -155,9 +159,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                     else if (grids_filled[1]== 1){
                         newp = 0;
@@ -165,9 +171,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                     else {
                         newp = (int)Random.Range((int)(0),(int)(2)); //int random is exclusive
@@ -175,9 +183,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                 }
                 else if (oldp == numcols-1){ // too large
@@ -191,9 +201,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                     else if (grids_filled[oldp-1] == 1){
                         newp = oldp;
@@ -201,9 +213,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                     else{
                         newp = (int)Random.Range((int)(oldp-1),(int)(oldp+1)); //int random is exclusive
@@ -211,9 +225,11 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(rocks);
-                        newRock.transform.position = newpos;
+                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                        // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                        // GameObject newRock = Instantiate(Rock);
+                        // newRock.transform.position = newpos;
+                        // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                     }
                 }
                 else if (grids_filled[oldp-1] == 1 && grids_filled[oldp] == 1 && grids_filled[oldp+1] == 1){
@@ -226,9 +242,11 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                 }
                 else if (grids_filled[oldp] == 1 && grids_filled[oldp + 1] == 1){
                     newp = oldp -1;
@@ -236,9 +254,11 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                 }
                 else if (grids_filled[oldp-1] == 1 && grids_filled[oldp + 1] == 1){
                     newp = oldp;
@@ -246,9 +266,11 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                 }
                 else if (grids_filled[oldp-1] == 1){
                     newp = (int)(Random.Range((int)(oldp),(int)(oldp+2)));
@@ -256,9 +278,11 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                 }
                 else if (grids_filled[oldp] == 1){
                     int randval = (int)(Random.Range((int)(0), (int)(2)));
@@ -272,9 +296,13 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
+                    
+
                 }
                 else if (grids_filled[oldp+1] == 1){
                     newp = (int)(Random.Range((int)(oldp-1),(int)(oldp+1)));
@@ -282,9 +310,11 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.transform.position = newpos;
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
                 }
                 else{
                     newp = (Random.Range((int)(oldp-1),(int)(oldp+2)));
@@ -293,9 +323,12 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                    GameObject newRock = InstantiateRock(rocks);
-                    newRock.transform.position = newpos;
+                    GameObject newRock = InstantiateRock(x1,x2,y1,y2);
+                    // Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+                    // GameObject newRock = Instantiate(Rock);
+                    // newRock.GetComponent<SpriteRenderer>().sprite = rock1;
+                    // newRock.transform.position = newpos;
+                    
                 }
                 
                 for(int n = 0; n < numcols; n++){
@@ -336,6 +369,8 @@ public class PositionRandomization : MonoBehaviour
     //         x1 = x2;
     //     }
     // }
+
+
 
     // Update is called once per frame
     void Update()
