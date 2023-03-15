@@ -318,17 +318,18 @@ public class PlayerManager : MonoBehaviour
     // Calculate IK: gradient to _leftAim position
     if (leftControlerInput.magnitude != 0)
     {
+      float boost = Vector2.Distance(_leftRadius2HandPoint, _virtualLeftAim); // for boosting torque at parallel angle
       // make [Body, Hand] vector to [Body, Aim] vector
       Vector2 leftBody2AimVector = _virtualLeftAim - _leftBody2HumerusPoint;
       Vector2 leftBody2HumerusVector = _virtualLeftAim - _leftRadius2HandPoint;
       float angle = Vector2.SignedAngle(leftBody2HumerusVector, leftBody2AimVector);
-      _leftHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      _leftHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime * boost);
 
       // make [Humerus, Radius] vector to [Humerus, Aim] vector
       Vector2 leftHumerus2AimVector = _virtualLeftAim - _leftHumerus2RadiusPoint;
       Vector2 leftHumerus2RadiusVector = _virtualLeftAim - _leftRadius2HandPoint;
       angle = Vector2.SignedAngle(leftHumerus2RadiusVector, leftHumerus2AimVector);
-      _leftRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      _leftRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime * boost);
 
       // make [Radius, Hand] vector to [Radius, Aim] vector
       // Vector2 leftRadius2AimVector = ((Vector2) _leftAim.transform.position) - _leftRadius2HandPoint;
@@ -347,17 +348,18 @@ public class PlayerManager : MonoBehaviour
 
     if (rightControlerInput.magnitude != 0)
     {
+      float boost = Vector2.Distance(_rightRadius2HandPoint, _virtualRightAim); // for boosting torque at parallel angle
       // right arm
       Vector2 rightBody2AimVector = _virtualRightAim - _rightBody2HumerusPoint;
       Vector2 rightBody2HumerusVector = _virtualRightAim - _rightRadius2HandPoint;
       float angle = Vector2.SignedAngle(rightBody2HumerusVector, rightBody2AimVector);
-      _rightHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      _rightHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime * boost);
 
       // right arm
       Vector2 rightHumerus2AimVector = _virtualRightAim - _rightHumerus2RadiusPoint;
       Vector2 rightHumerus2RadiusVector = _virtualRightAim - _rightRadius2HandPoint;
       angle = Vector2.SignedAngle(rightHumerus2RadiusVector, rightHumerus2AimVector);
-      _rightRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      _rightRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime * boost);
 
       // right arm
       float distance = Vector2.Distance(_rightAim.transform.position, _rightHand.transform.position);
