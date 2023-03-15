@@ -34,7 +34,6 @@ public class PositionRandomization : MonoBehaviour
   {
     GameObject newRock = Instantiate(Rock);
     newRock.transform.parent = background.transform;
-    print(backgroundDimension);
     newRock.transform.position = new Vector2((Random.Range(x1 + SPACING, x2 - SPACING)), (Random.Range(y1 + SPACING, y2 - SPACING)));
     newRock.transform.position -= new Vector3(backgroundDimension.x / 2f, 0f, 0f);
     newRock.GetComponent<SpriteRenderer>().sprite = rocks[Random.Range(0, rocks.Length)];
@@ -62,9 +61,7 @@ public class PositionRandomization : MonoBehaviour
     Debug.Assert(background != null, "Background is null");
     Debug.Assert(Rock != null, "Rock is null");
 
-    print(background.GetComponent<SpriteRenderer>().sprite.bounds.size);
-    print(background.transform.localScale);
-    backgroundDimension = Vector3.Scale(background.GetComponent<SpriteRenderer>().sprite.bounds.size, background.transform.localScale);
+    backgroundDimension = Vector3.Scale(background.GetComponent<SpriteRenderer>().sprite.bounds.size, background.transform.lossyScale);
   }
 
   // Start is called before the first frame update
@@ -84,8 +81,6 @@ public class PositionRandomization : MonoBehaviour
       float y2 = y1 + ROW_HEIGHT;
 
       path_prev_col[p] = (int)(p * ((float)numcols / (float)N_PATHS));///column number 
-      print(numcols / N_PATHS);
-      print(path_prev_col[p]);
 
       float x1 = x0 + (float)path_prev_col[p] * COL_WIDTH;
       float x2 = x1 + COL_WIDTH;
@@ -107,7 +102,6 @@ public class PositionRandomization : MonoBehaviour
       {
         int oldp = path_prev_col[p]; // index of prev location
         int newp = 0;
-        print("oldp" + oldp);
         if (oldp == 0)
         { //leftmost
           if (grids_filled[0] == 1 && grids_filled[1] == 1)
@@ -244,7 +238,6 @@ public class PositionRandomization : MonoBehaviour
         else
         {
           newp = (Random.Range((int)(oldp - 1), (int)(oldp + 2)));
-          print("newp" + newp);
           path_prev_col[p] = newp;
           grids_filled[newp] = 1;
           float x1 = x0 + newp * COL_WIDTH;

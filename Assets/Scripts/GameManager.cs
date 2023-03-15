@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
           }
           player.leftIndicator.transform.position = leftRock.transform.position;
           player.leftIndicator.SetActive(true);
+          player.OnLeftGrabEvent(); // refresh, since player may hold the key
         } else {
           if (player.leftIndicator != null) {
             player.leftIndicator.SetActive(false);
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
           }
           player.rightIndicator.transform.position = rightRock.transform.position;
           player.rightIndicator.SetActive(true);
+          player.OnRightGrabEvent(); // refresh, since player may hold the key
         } else {
           if (player.rightIndicator != null) {
             player.rightIndicator.SetActive(false);

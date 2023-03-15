@@ -82,6 +82,11 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public GameObject leftIndicator;
   [HideInInspector] public GameObject rightIndicator;
 
+  private Vector3 Divide(Vector3 a, Vector3 b)
+  {
+    return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
+  }
+
   public void OnControlsChanged(PlayerInput playerInput)
   {
     playerInput.camera = _camera;
@@ -117,11 +122,13 @@ public class PlayerManager : MonoBehaviour
   }
 
   // Now start Event Handlers
-  private void OnLeftGrabEvent(InputAction.CallbackContext context, int playerIndex)
+  public void OnLeftGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
     leftGrab = context.ReadValueAsButton();
-
+    OnLeftGrabEvent();
+  }
+  public void OnLeftGrabEvent() {
     // update _leftAim with red color
     _leftAim.GetComponent<SpriteRenderer>().color = leftGrab ? Color.red : Color.gray;
     _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSprite : _handReleaseSprite;
@@ -138,7 +145,7 @@ public class PlayerManager : MonoBehaviour
       _leftHandJoint.enabled = true;
       _leftHandJoint.connectedBody = _worldRigidbody;
       _leftHandJoint.anchor = Vector2.zero;
-      _leftHandJoint.connectedAnchor = grabbingPosition - _worldRigidbody.transform.position;
+      _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
       _leftHandJoint.autoConfigureConnectedAnchor = false;
       _leftHandJoint.useLimits = false;
       _leftHandJoint.useMotor = false;
@@ -152,11 +159,13 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-  private void OnRightGrabEvent(InputAction.CallbackContext context, int playerIndex)
+  public void OnRightGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
     rightGrab = context.ReadValueAsButton();
-
+    OnRightGrabEvent();
+  }
+  public void OnRightGrabEvent() {
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSprite : _handReleaseSprite;
@@ -173,7 +182,7 @@ public class PlayerManager : MonoBehaviour
       _rightHandJoint.enabled = true;
       _rightHandJoint.connectedBody = _worldRigidbody;
       _rightHandJoint.anchor = Vector2.zero;
-      _rightHandJoint.connectedAnchor = grabbingPosition - _worldRigidbody.transform.position;
+      _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
       _rightHandJoint.autoConfigureConnectedAnchor = false;
       _rightHandJoint.useLimits = false;
       _rightHandJoint.useMotor = false;
@@ -187,14 +196,14 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-  private void OnLeftMoveEvent(InputAction.CallbackContext context, int playerIndex)
+  public void OnLeftMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
     leftControlerInput = context.ReadValue<Vector2>();
     leftStick = (Vector2)_leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
   }
 
-  private void OnRightMoveEvent(InputAction.CallbackContext context, int playerIndex)
+  public void OnRightMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
     rightControlerInput = context.ReadValue<Vector2>();

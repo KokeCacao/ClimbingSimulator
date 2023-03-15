@@ -66,6 +66,8 @@ MonoBehaviour:
   rightStick: {x: 0, y: 0}
   leftControlerInput: {x: 0, y: 0}
   rightControlerInput: {x: 0, y: 0}
+  leftIndicator: {fileID: 0}
+  rightIndicator: {fileID: 0}
 --- !u!114 &8357164010986741288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4624916881464044205}
   - component: {fileID: 538579758192633217}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftHandSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284894268738491513}
   - component: {fileID: 881341411523073664}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightHumerusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +950,7 @@ GameObject:
   - component: {fileID: 8105985442180151909}
   - component: {fileID: 3381137123099104585}
   - component: {fileID: 2755234468647888918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1113,8 @@ GameObject:
   - component: {fileID: 33800973778131927}
   - component: {fileID: 7009143110271098144}
   - component: {fileID: 1406096124500086909}
-  m_Layer: 0
+  - component: {fileID: 2934730204756770789}
+  m_Layer: 3
   m_Name: RightRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,6 +1182,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!70 &2934730204756770789
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419423333564348884}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.1, y: 1}
+  m_Direction: 0
 --- !u!1 &4953181327743247522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4150653905350021221}
   - component: {fileID: 8108972652336857069}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftHumerusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1348,7 +1367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5911166774544376475}
   - component: {fileID: 2420786818639484272}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftRadiusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1663,8 @@ GameObject:
   - component: {fileID: 4718093271092593105}
   - component: {fileID: 2507094368760862263}
   - component: {fileID: 392403372087094719}
-  m_Layer: 0
+  - component: {fileID: 1762056250559479775}
+  m_Layer: 3
   m_Name: LeftHumerus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1712,6 +1732,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -90
     m_UpperAngle: 90
+--- !u!70 &1762056250559479775
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349015721453683753}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.1, y: 1}
+  m_Direction: 0
 --- !u!1 &7407724261238833152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1914,8 @@ GameObject:
   - component: {fileID: 5706539126652790597}
   - component: {fileID: 5828101021981325804}
   - component: {fileID: 8692629835189819225}
-  m_Layer: 0
+  - component: {fileID: 1194352063670618633}
+  m_Layer: 3
   m_Name: LeftRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1946,6 +1983,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!70 &1194352063670618633
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691019897002947090}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.1, y: 1}
+  m_Direction: 0
 --- !u!1 &8355274959255521225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,7 +2173,8 @@ GameObject:
   - component: {fileID: 1446716891828133879}
   - component: {fileID: 5530382168666963781}
   - component: {fileID: 8196362618708617991}
-  m_Layer: 0
+  - component: {fileID: 645391614733513165}
+  m_Layer: 3
   m_Name: RightHumerus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,6 +2242,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -90
     m_UpperAngle: 90
+--- !u!70 &645391614733513165
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851166047151976234}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.1, y: 1}
+  m_Direction: 0
 --- !u!1 &9131687292740299548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,7 +2268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835262900314400857}
   - component: {fileID: 2265900997753565962}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightRadiusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
