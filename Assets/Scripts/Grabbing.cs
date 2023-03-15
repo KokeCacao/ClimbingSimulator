@@ -11,7 +11,7 @@ public class Grabbing : MonoBehaviour
     bool GrabbingF(float handx, float handy){
         
         GameObject[ ] rocksInGame = GameObject.FindGameObjectsWithTag("rock");
-        for (int i = 0; i < 18; i++){
+        for (int i = 0; i < rocksInGame.Length; i++){
             GameObject currRock = rocksInGame[i];
             float rockx = currRock.transform.position.x;
             float rocky = currRock.transform.position.y;
