@@ -145,7 +145,7 @@ public class PlayerManager : MonoBehaviour
       _leftHandJoint.enabled = true;
       _leftHandJoint.connectedBody = _worldRigidbody;
       _leftHandJoint.anchor = Vector2.zero;
-      _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
+      _leftHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
       _leftHandJoint.autoConfigureConnectedAnchor = false;
       _leftHandJoint.useLimits = false;
       _leftHandJoint.useMotor = false;
@@ -326,19 +326,22 @@ public class PlayerManager : MonoBehaviour
 
   void Update()
   {
+    // virtual aim for knowing what force to apply
     _virtualLeftAim = leftStick;
     _virtualRightAim = rightStick;
 
+    // aim indicator
     if (!leftGrab)
     {
-
       _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
     }
     if (!rightGrab)
     {
-
       _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
     }
+
+    // camera follow
+    _camera.transform.position = new Vector3(0, _player.transform.position.y, -10);
   }
 
   private void FixedUpdate()
