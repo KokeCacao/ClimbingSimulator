@@ -55,11 +55,21 @@ MonoBehaviour:
   _virtualLeftAim: {x: 0, y: 0}
   _virtualRightAim: {x: 0, y: 0}
   _camera: {fileID: 5266713735304571029}
-  _handReleaseSprite: {fileID: 21300000, guid: e1ef4001b39a1464eb02d1eeb66c073f, type: 3}
-  _handGrabSprite: {fileID: 21300000, guid: e15553222d4c2114a9724e1b7632d919, type: 3}
-  _humerusSprite: {fileID: 21300000, guid: 01b77feeb8a67c54abdfce48a39e6aeb, type: 3}
-  _radiusSprite: {fileID: 21300000, guid: 699719677a94be448945e9dec66056e9, type: 3}
-  _playerTreeSprite: {fileID: 21300000, guid: 2daaaf8e36f1d544887ddc2e436969bd, type: 3}
+  _handReleaseSprite:
+  - {fileID: 21300000, guid: e1ef4001b39a1464eb02d1eeb66c073f, type: 3}
+  - {fileID: 21300000, guid: 0ff30bcd5d9419646b4e0cd7464f373b, type: 3}
+  _handGrabSprite:
+  - {fileID: 21300000, guid: e15553222d4c2114a9724e1b7632d919, type: 3}
+  - {fileID: 21300000, guid: 5f756e9828d15524c96a9a9ce945ef53, type: 3}
+  _humerusSprite:
+  - {fileID: 21300000, guid: 01b77feeb8a67c54abdfce48a39e6aeb, type: 3}
+  - {fileID: 21300000, guid: 8eb7424aadad7d94aa5aa6330eb56352, type: 3}
+  _radiusSprite:
+  - {fileID: 21300000, guid: 699719677a94be448945e9dec66056e9, type: 3}
+  - {fileID: 21300000, guid: c41355bf4bb4c8f4883965b9e1c621e7, type: 3}
+  _playerTreeSprite:
+  - {fileID: 21300000, guid: 2daaaf8e36f1d544887ddc2e436969bd, type: 3}
+  - {fileID: 21300000, guid: 67565511018431b4f97bbd2baf7da731, type: 3}
   leftGrab: 0
   rightGrab: 0
   leftStick: {x: 0, y: 0}

@@ -22,11 +22,11 @@ public class PlayerManager : MonoBehaviour
   [SerializeField] private Camera _camera;
 
   // Sprites
-  [SerializeField] private Sprite _handReleaseSprite;
-  [SerializeField] private Sprite _handGrabSprite;
-  [SerializeField] private Sprite _humerusSprite;
-  [SerializeField] private Sprite _radiusSprite;
-  [SerializeField] private Sprite _playerTreeSprite;
+  [SerializeField] private Sprite[] _handReleaseSprite;
+  [SerializeField] private Sprite[] _handGrabSprite;
+  [SerializeField] private Sprite[] _humerusSprite;
+  [SerializeField] private Sprite[] _radiusSprite;
+  [SerializeField] private Sprite[] _playerTreeSprite;
 
   // These are automatically based on above
   [HideInInspector] private GameManager _gameManager;
@@ -131,7 +131,7 @@ public class PlayerManager : MonoBehaviour
   public void OnLeftGrabEvent() {
     // update _leftAim with red color
     _leftAim.GetComponent<SpriteRenderer>().color = leftGrab ? Color.red : Color.gray;
-    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSprite : _handReleaseSprite;
+    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSprite[playerIndex % _handGrabSprite.Length] : _handReleaseSprite[playerIndex % _handReleaseSprite.Length];
 
     // if grabbing, add a hinge joint at hand position
     GameObject grabbed = _gameManager.positionRandomization.canGrab(_leftHand.transform.position);
@@ -168,7 +168,7 @@ public class PlayerManager : MonoBehaviour
   public void OnRightGrabEvent() {
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
-    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSprite : _handReleaseSprite;
+    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSprite[playerIndex % _handGrabSprite.Length] : _handReleaseSprite[playerIndex % _handReleaseSprite.Length];
 
     // if grabbing, add a hinge joint at hand position
     GameObject grabbed = _gameManager.positionRandomization.canGrab(_rightHand.transform.position);
@@ -295,13 +295,13 @@ public class PlayerManager : MonoBehaviour
     // change player sprite
     GameObject bodySprite = _body.transform.Find("BodySprite").gameObject;
     GameObject playerTree = bodySprite.transform.Find("PlayerTree").gameObject;
-    playerTree.GetComponent<SpriteRenderer>().sprite = _playerTreeSprite;
-    _leftHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
-    _leftRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
-    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
-    _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
-    _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
-    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
+    playerTree.GetComponent<SpriteRenderer>().sprite = _playerTreeSprite[playerIndex % _playerTreeSprite.Length];
+    _leftHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite[playerIndex % _humerusSprite.Length];
+    _leftRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite[playerIndex % _radiusSprite.Length];
+    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite[playerIndex % _handReleaseSprite.Length];
+    _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite[playerIndex % _humerusSprite.Length];
+    _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite[playerIndex % _radiusSprite.Length];
+    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite[playerIndex % _handReleaseSprite.Length];
 
     // add itself to GameManager
     _gameManager.players.Add(this);
