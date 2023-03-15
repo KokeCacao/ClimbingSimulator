@@ -12,19 +12,19 @@ public class PositionRandomization : MonoBehaviour
     
     private float totalheight = 1900f;
     
-    private float rowheight = 100f;
+    private float rowheight = 75f;
     
     private float totalwidth = 420f;
     
-    private float colwidth = 100f;
+    private float colwidth = 70f;
 
-    private float spacing = 10f;
+    private float spacing = 25f;
     
     private float x0 = 20f;
     
     private float y0 = 0f;
     
-    private int numpaths = 3;
+    private int numpaths = 4;
     //background: 1080x4213
     //random rock
     //random rotation
