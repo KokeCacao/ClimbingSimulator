@@ -6,18 +6,21 @@ public class PositionRandomization : MonoBehaviour
 {
     [SerializeField]
     private GameObject Rock;
+
+    [SerializeField]
+    private GameObject Background;
     
-    private float totalheight = 421.3f;
+    private float totalheight = 1900f;
     
-    private float rowheight = 20f;
+    private float rowheight = 200f;
     
-    private float totalwidth = 108.0f;
+    private float totalwidth = 440f;
     
-    private float colwidth = 13f;
+    private float colwidth = 200f;
     
-    private float x0 = -50f;
+    private float x0 = 0f;
     
-    private float y0 = -80f;
+    private float y0 = 0f;
     
     private int numpaths = 3;
     //background: 1080x4213
@@ -66,7 +69,6 @@ public class PositionRandomization : MonoBehaviour
         Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
         GameObject newRock = Instantiate(Rock);
         newRock.transform.position = newpos;
-        //newRock.sprite = rock1;
         int randomRock = Random.Range(1,18);
         switch(randomRock)
         {
@@ -135,6 +137,8 @@ public class PositionRandomization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        totalheight = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.y*50;
+        totalwidth = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.x*50;
 
         int[] path_prev_col = new int[numpaths];
 
@@ -175,7 +179,7 @@ public class PositionRandomization : MonoBehaviour
                 int oldp  =  path_prev_col[p]; // index of prev location
                 int newp = 0;
                 print("oldp" + oldp);
-                if (oldp == 0){
+                if (oldp == 0){ //leftmost
                     if (grids_filled[0] == 1 && grids_filled[1] == 1){
                         newp = (int)Random.Range((int)(1),(int)(2));  //not instantiate
                         path_prev_col[p] = newp;
