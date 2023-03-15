@@ -7,12 +7,16 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public const float ARM_LENGTH = 2.0f;
   [HideInInspector] public const float IK_SPEED = 100.0f;
   [HideInInspector] public const float IK_DRAG_BASE = 1.0f;
-  [HideInInspector] public const float IK_DRAG = 100.0f;
+  [HideInInspector] public const float IK_DRAG = 10.0f;
+  [HideInInspector] public const float IK_GRAVITY = 1.0f;
+  [HideInInspector] public const float IK_MASS = 1.0f;
 
   // Input Game Objects
   [SerializeField] private GameObject _player;
   [SerializeField] private GameObject _leftAim;
   [SerializeField] private GameObject _rightAim;
+  [SerializeField] private Vector2 _virtualLeftAim;
+  [SerializeField] private Vector2 _virtualRightAim;
   [SerializeField] private Camera _camera;
 
   // These are automatically based on above
@@ -57,6 +61,8 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public bool rightGrab;
   [HideInInspector] public Vector2 leftStick;
   [HideInInspector] public Vector2 rightStick;
+  [HideInInspector] public Vector2 leftControlerInput;
+  [HideInInspector] public Vector2 rightControlerInput;
 
   // These are initialized directly
   [HideInInspector] private Controls controls;
@@ -86,8 +92,10 @@ public class PlayerManager : MonoBehaviour
     controls.Enable();
   }
 
-  private bool isValidInput(InputAction.CallbackContext context) {
-    if (deviceIndex == -1) {
+  private bool isValidInput(InputAction.CallbackContext context)
+  {
+    if (deviceIndex == -1)
+    {
       deviceIndex = context.control.device.deviceId;
       return true;
     }
@@ -162,19 +170,15 @@ public class PlayerManager : MonoBehaviour
   private void OnLeftMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
+    leftControlerInput = context.ReadValue<Vector2>();
     leftStick = (Vector2)_leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
-
-    // update _leftAim
-    _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
   }
 
   private void OnRightMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
+    rightControlerInput = context.ReadValue<Vector2>();
     rightStick = (Vector2)_rightBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
-
-    // update _rightAim
-    _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
   }
 
   void Awake()
@@ -233,11 +237,31 @@ public class PlayerManager : MonoBehaviour
     _rightHumerusRigidbody.angularDrag = IK_DRAG;
     _rightRadiusRigidbody.angularDrag = IK_DRAG;
     _rightHandRigidbody.angularDrag = IK_DRAG;
+
+    // set ridigbody mass
+    Rigidbody2D[] rigidBodies = GetComponentsInChildren<Rigidbody2D>(true);
+    foreach (Rigidbody2D rigidBody in rigidBodies)
+    {
+        rigidBody.gravityScale = IK_GRAVITY;
+        rigidBody.mass = IK_MASS;
+    }
+
+
   }
 
   void Update()
   {
+    _virtualLeftAim = leftStick;
+    _virtualRightAim = rightStick;
+    
+    if (!leftGrab) {
 
+      _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
+    }
+    if (!rightGrab) {
+
+      _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
+    }
   }
 
   private void FixedUpdate()
@@ -254,50 +278,56 @@ public class PlayerManager : MonoBehaviour
 
 
     // Calculate IK: gradient to _leftAim position
+    if (leftControlerInput.magnitude != 0)
+    {
+      // make [Body, Hand] vector to [Body, Aim] vector
+      Vector2 leftBody2AimVector = _virtualLeftAim - _leftBody2HumerusPoint;
+      Vector2 leftBody2HumerusVector = _virtualLeftAim - _leftRadius2HandPoint;
+      float angle = Vector2.SignedAngle(leftBody2HumerusVector, leftBody2AimVector);
+      _leftHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
 
-    // make [Body, Hand] vector to [Body, Aim] vector
-    Vector2 leftBody2AimVector = ((Vector2)_leftAim.transform.position) - _leftBody2HumerusPoint;
-    Vector2 leftBody2HumerusVector = ((Vector2)_leftAim.transform.position) - _leftRadius2HandPoint;
-    float angle = Vector2.SignedAngle(leftBody2HumerusVector, leftBody2AimVector);
-    _leftHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      // make [Humerus, Radius] vector to [Humerus, Aim] vector
+      Vector2 leftHumerus2AimVector = _virtualLeftAim - _leftHumerus2RadiusPoint;
+      Vector2 leftHumerus2RadiusVector = _virtualLeftAim - _leftRadius2HandPoint;
+      angle = Vector2.SignedAngle(leftHumerus2RadiusVector, leftHumerus2AimVector);
+      _leftRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
 
-    // right arm
-    Vector2 rightBody2AimVector = ((Vector2)_rightAim.transform.position) - _rightBody2HumerusPoint;
-    Vector2 rightBody2HumerusVector = ((Vector2)_rightAim.transform.position) - _rightRadius2HandPoint;
-    angle = Vector2.SignedAngle(rightBody2HumerusVector, rightBody2AimVector);
-    _rightHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      // make [Radius, Hand] vector to [Radius, Aim] vector
+      // Vector2 leftRadius2AimVector = ((Vector2) _leftAim.transform.position) - _leftRadius2HandPoint;
+      // Vector2 leftRadius2HandVector = ((Vector2) _leftAim.transform.position) - _leftHand2RadiusPoint;
+      // angle = Vector2.SignedAngle(leftRadius2HandVector, leftRadius2AimVector);
+      // _leftHandRadiusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * Mathf.Abs(angle) * IK_SPEED * Time.deltaTime);
 
-    // make [Humerus, Radius] vector to [Humerus, Aim] vector
-    Vector2 leftHumerus2AimVector = ((Vector2)_leftAim.transform.position) - _leftHumerus2RadiusPoint;
-    Vector2 leftHumerus2RadiusVector = ((Vector2)_leftAim.transform.position) - _leftRadius2HandPoint;
-    angle = Vector2.SignedAngle(leftHumerus2RadiusVector, leftHumerus2AimVector);
-    _leftRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+      // update angular drag
+      float distance = Vector2.Distance(_leftAim.transform.position, _leftHand.transform.position);
+      float drag = Mathf.Exp(-distance) * IK_DRAG + IK_DRAG_BASE;
+      _leftHumerusRigidbody.angularDrag = drag;
+      _leftRadiusRigidbody.angularDrag = drag;
+      _leftHandRigidbody.angularDrag = drag;
 
-    // right arm
-    Vector2 rightHumerus2AimVector = ((Vector2)_rightAim.transform.position) - _rightHumerus2RadiusPoint;
-    Vector2 rightHumerus2RadiusVector = ((Vector2)_rightAim.transform.position) - _rightRadius2HandPoint;
-    angle = Vector2.SignedAngle(rightHumerus2RadiusVector, rightHumerus2AimVector);
-    _rightRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
+    }
 
-    // make [Radius, Hand] vector to [Radius, Aim] vector
-    // Vector2 leftRadius2AimVector = ((Vector2) _leftAim.transform.position) - _leftRadius2HandPoint;
-    // Vector2 leftRadius2HandVector = ((Vector2) _leftAim.transform.position) - _leftHand2RadiusPoint;
-    // angle = Vector2.SignedAngle(leftRadius2HandVector, leftRadius2AimVector);
-    // _leftHandRadiusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * Mathf.Abs(angle) * IK_SPEED * Time.deltaTime);
+    if (rightControlerInput.magnitude != 0)
+    {
+      // right arm
+      Vector2 rightBody2AimVector = _virtualRightAim - _rightBody2HumerusPoint;
+      Vector2 rightBody2HumerusVector = _virtualRightAim - _rightRadius2HandPoint;
+      float angle = Vector2.SignedAngle(rightBody2HumerusVector, rightBody2AimVector);
+      _rightHumerusBodyJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
 
-    // update angular drag
-    float distance = Vector2.Distance(_leftAim.transform.position, _leftHand.transform.position);
-    float drag = Mathf.Exp(-distance) * IK_DRAG + IK_DRAG_BASE;
-    _leftHumerusRigidbody.angularDrag = drag;
-    _leftRadiusRigidbody.angularDrag = drag;
-    _leftHandRigidbody.angularDrag = drag;
+      // right arm
+      Vector2 rightHumerus2AimVector = _virtualRightAim - _rightHumerus2RadiusPoint;
+      Vector2 rightHumerus2RadiusVector = _virtualRightAim - _rightRadius2HandPoint;
+      angle = Vector2.SignedAngle(rightHumerus2RadiusVector, rightHumerus2AimVector);
+      _rightRadiusHumerusJoint.GetComponent<Rigidbody2D>().AddTorque(-angle * IK_SPEED * Time.deltaTime);
 
-    // right arm
-    distance = Vector2.Distance(_rightAim.transform.position, _rightHand.transform.position);
-    drag = Mathf.Exp(-distance) * IK_DRAG + IK_DRAG_BASE;
-    _rightHumerusRigidbody.angularDrag = drag;
-    _rightRadiusRigidbody.angularDrag = drag;
-    _rightHandRigidbody.angularDrag = drag;
+      // right arm
+      float distance = Vector2.Distance(_rightAim.transform.position, _rightHand.transform.position);
+      float drag = Mathf.Exp(-distance) * IK_DRAG + IK_DRAG_BASE;
+      _rightHumerusRigidbody.angularDrag = drag;
+      _rightRadiusRigidbody.angularDrag = drag;
+      _rightHandRigidbody.angularDrag = drag;
+    }
   }
 
   private void LateUpdate()

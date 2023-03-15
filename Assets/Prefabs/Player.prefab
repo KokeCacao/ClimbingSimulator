@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183142157990674369}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.019441942, y: -0.03377076, z: 0.005918741}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -52,11 +52,15 @@ MonoBehaviour:
   _player: {fileID: 183142157990674369}
   _leftAim: {fileID: 5989371370213551934}
   _rightAim: {fileID: 8700316274348971165}
+  _virtualLeftAim: {x: 0, y: 0}
+  _virtualRightAim: {x: 0, y: 0}
   _camera: {fileID: 5266713735304571029}
   leftGrab: 0
   rightGrab: 0
   leftStick: {x: 0, y: 0}
   rightStick: {x: 0, y: 0}
+  leftControlerInput: {x: 0, y: 0}
+  rightControlerInput: {x: 0, y: 0}
 --- !u!114 &8357164010986741288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +88,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: ActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 5266713735304571029}
 --- !u!1 &358541230826074426
@@ -98,6 +102,7 @@ GameObject:
   - component: {fileID: 2387470733717123855}
   - component: {fileID: 7507508338310826707}
   - component: {fileID: 809565628616846341}
+  - component: {fileID: 2099633205}
   m_Layer: 0
   m_Name: bone_7
   m_TagString: Untagged
@@ -165,6 +170,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -60
     m_UpperAngle: 60
+--- !u!70 &2099633205
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358541230826074426}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.6}
+  m_Direction: 1
 --- !u!1 &553116693545856861
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +317,7 @@ GameObject:
   - component: {fileID: 2684314384150522780}
   - component: {fileID: 5680397945516316896}
   - component: {fileID: 9004806507852166214}
+  - component: {fileID: 1854449001}
   m_Layer: 0
   m_Name: bone_8
   m_TagString: Untagged
@@ -363,6 +385,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -60
     m_UpperAngle: 60
+--- !u!70 &1854449001
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897025561298966257}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.2}
+  m_Direction: 1
 --- !u!1 &927174790365223931
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +658,7 @@ GameObject:
   - component: {fileID: 4158499521759405225}
   - component: {fileID: 3225222902320709409}
   - component: {fileID: 5786594546560567064}
+  - component: {fileID: 1766848035}
   m_Layer: 0
   m_Name: bone_3
   m_TagString: Untagged
@@ -687,6 +726,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!70 &1766848035
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053404167814190611}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.6}
+  m_Direction: 1
 --- !u!1 &2194530831376885492
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +753,7 @@ GameObject:
   - component: {fileID: 9157400341438682629}
   - component: {fileID: 820121056987798367}
   - component: {fileID: 4732583081488169843}
+  - component: {fileID: 1788638540}
   m_Layer: 0
   m_Name: bone_6
   m_TagString: Untagged
@@ -765,6 +821,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -60
     m_UpperAngle: 60
+--- !u!70 &1788638540
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194530831376885492}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1.2}
+  m_Direction: 1
 --- !u!1 &2731279724561807816
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +848,7 @@ GameObject:
   - component: {fileID: 2731316867558009480}
   - component: {fileID: 6127520535575643622}
   - component: {fileID: 6136941828541905811}
+  - component: {fileID: 298868175}
   m_Layer: 0
   m_Name: bone_5
   m_TagString: Untagged
@@ -834,7 +907,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.51004416, y: 0.00000027380878}
+  m_ConnectedAnchor: {x: 0.5100442, y: 0.00000027567143}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -843,6 +916,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -60
     m_UpperAngle: 60
+--- !u!70 &298868175
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731279724561807816}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.9}
+  m_Direction: 1
 --- !u!1 &3899380450218694270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1165,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.5}
-  m_ConnectedAnchor: {x: -0.000000016610324, y: 0.3799999}
+  m_ConnectedAnchor: {x: -0.000000005434455, y: 0.3799999}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1455,6 +1544,7 @@ GameObject:
   - component: {fileID: 2293468141534665703}
   - component: {fileID: 7363934199226941213}
   - component: {fileID: 5901649806425436291}
+  - component: {fileID: 1914774216}
   m_Layer: 0
   m_Name: bone_9
   m_TagString: Untagged
@@ -1522,6 +1612,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -30
     m_UpperAngle: 30
+--- !u!70 &1914774216
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6558722773262933188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.1}
+  m_Direction: 1
 --- !u!1 &7349015721453683753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1698,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.5}
-  m_ConnectedAnchor: {x: -0.24999988, y: 0.0000000218557}
+  m_ConnectedAnchor: {x: -0.2499999, y: 0.000000022351742}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1672,6 +1778,7 @@ GameObject:
   - component: {fileID: 3716156673693122019}
   - component: {fileID: 2482166646980895840}
   - component: {fileID: 3614828084367147710}
+  - component: {fileID: 987259151}
   m_Layer: 0
   m_Name: bone_4
   m_TagString: Untagged
@@ -1739,6 +1846,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -60
     m_UpperAngle: 60
+--- !u!70 &987259151
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552938485575084293}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.8}
+  m_Direction: 1
 --- !u!1 &7691019897002947090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,7 +1932,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.5}
-  m_ConnectedAnchor: {x: 0.000000016610324, y: 0.3799999}
+  m_ConnectedAnchor: {x: 0.000000005434455, y: 0.3799999}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2051,7 +2174,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.5}
-  m_ConnectedAnchor: {x: 0.24999988, y: 0.0000000218557}
+  m_ConnectedAnchor: {x: 0.24999987, y: 0.000000022351742}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
