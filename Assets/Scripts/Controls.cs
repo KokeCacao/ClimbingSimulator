@@ -110,94 +110,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""ActionMap1"",
-            ""id"": ""e4e3f4ec-c4f6-4402-b59a-0132e1beed10"",
-            ""actions"": [
-                {
-                    ""name"": ""LeftGrab"",
-                    ""type"": ""Button"",
-                    ""id"": ""540ba958-6726-43d8-9e4a-d0aa6bc07a46"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightGrab"",
-                    ""type"": ""Button"",
-                    ""id"": ""285d24bb-6dba-4dea-9edf-191bac8283f9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LeftArm"",
-                    ""type"": ""Value"",
-                    ""id"": ""42d07159-54a3-4b6b-91dd-6186d41ef437"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""RightArm"",
-                    ""type"": ""Value"",
-                    ""id"": ""1f0441c1-e7fb-4a48-9267-0f53b8965e4f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4b5508ef-71ec-4da3-9c65-f656cc0ef5d6"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Control Scheme"",
-                    ""action"": ""LeftGrab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e2daa3cc-ee85-468e-95de-71fe904d1e75"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Control Scheme"",
-                    ""action"": ""RightGrab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1a1c2360-2077-4774-89df-eac6c55e0d2a"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Control Scheme"",
-                    ""action"": ""LeftArm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d4b82ab0-e67e-4291-a7a4-fafb44083a3d"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Control Scheme"",
-                    ""action"": ""RightArm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -220,12 +132,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_ActionMap_RightGrab = m_ActionMap.FindAction("RightGrab", throwIfNotFound: true);
         m_ActionMap_LeftArm = m_ActionMap.FindAction("LeftArm", throwIfNotFound: true);
         m_ActionMap_RightArm = m_ActionMap.FindAction("RightArm", throwIfNotFound: true);
-        // ActionMap1
-        m_ActionMap1 = asset.FindActionMap("ActionMap1", throwIfNotFound: true);
-        m_ActionMap1_LeftGrab = m_ActionMap1.FindAction("LeftGrab", throwIfNotFound: true);
-        m_ActionMap1_RightGrab = m_ActionMap1.FindAction("RightGrab", throwIfNotFound: true);
-        m_ActionMap1_LeftArm = m_ActionMap1.FindAction("LeftArm", throwIfNotFound: true);
-        m_ActionMap1_RightArm = m_ActionMap1.FindAction("RightArm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -338,63 +244,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public ActionMapActions @ActionMap => new ActionMapActions(this);
-
-    // ActionMap1
-    private readonly InputActionMap m_ActionMap1;
-    private IActionMap1Actions m_ActionMap1ActionsCallbackInterface;
-    private readonly InputAction m_ActionMap1_LeftGrab;
-    private readonly InputAction m_ActionMap1_RightGrab;
-    private readonly InputAction m_ActionMap1_LeftArm;
-    private readonly InputAction m_ActionMap1_RightArm;
-    public struct ActionMap1Actions
-    {
-        private @Controls m_Wrapper;
-        public ActionMap1Actions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftGrab => m_Wrapper.m_ActionMap1_LeftGrab;
-        public InputAction @RightGrab => m_Wrapper.m_ActionMap1_RightGrab;
-        public InputAction @LeftArm => m_Wrapper.m_ActionMap1_LeftArm;
-        public InputAction @RightArm => m_Wrapper.m_ActionMap1_RightArm;
-        public InputActionMap Get() { return m_Wrapper.m_ActionMap1; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ActionMap1Actions set) { return set.Get(); }
-        public void SetCallbacks(IActionMap1Actions instance)
-        {
-            if (m_Wrapper.m_ActionMap1ActionsCallbackInterface != null)
-            {
-                @LeftGrab.started -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftGrab;
-                @LeftGrab.performed -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftGrab;
-                @LeftGrab.canceled -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftGrab;
-                @RightGrab.started -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightGrab;
-                @RightGrab.performed -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightGrab;
-                @RightGrab.canceled -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightGrab;
-                @LeftArm.started -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftArm;
-                @LeftArm.performed -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftArm;
-                @LeftArm.canceled -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnLeftArm;
-                @RightArm.started -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightArm;
-                @RightArm.performed -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightArm;
-                @RightArm.canceled -= m_Wrapper.m_ActionMap1ActionsCallbackInterface.OnRightArm;
-            }
-            m_Wrapper.m_ActionMap1ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @LeftGrab.started += instance.OnLeftGrab;
-                @LeftGrab.performed += instance.OnLeftGrab;
-                @LeftGrab.canceled += instance.OnLeftGrab;
-                @RightGrab.started += instance.OnRightGrab;
-                @RightGrab.performed += instance.OnRightGrab;
-                @RightGrab.canceled += instance.OnRightGrab;
-                @LeftArm.started += instance.OnLeftArm;
-                @LeftArm.performed += instance.OnLeftArm;
-                @LeftArm.canceled += instance.OnLeftArm;
-                @RightArm.started += instance.OnRightArm;
-                @RightArm.performed += instance.OnRightArm;
-                @RightArm.canceled += instance.OnRightArm;
-            }
-        }
-    }
-    public ActionMap1Actions @ActionMap1 => new ActionMap1Actions(this);
     private int m_ControlSchemeSchemeIndex = -1;
     public InputControlScheme ControlSchemeScheme
     {
@@ -405,13 +254,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public interface IActionMapActions
-    {
-        void OnLeftGrab(InputAction.CallbackContext context);
-        void OnRightGrab(InputAction.CallbackContext context);
-        void OnLeftArm(InputAction.CallbackContext context);
-        void OnRightArm(InputAction.CallbackContext context);
-    }
-    public interface IActionMap1Actions
     {
         void OnLeftGrab(InputAction.CallbackContext context);
         void OnRightGrab(InputAction.CallbackContext context);

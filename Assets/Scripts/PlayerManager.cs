@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public const float IK_SPEED = 100.0f;
   [HideInInspector] public const float IK_DRAG_BASE = 1.0f;
   [HideInInspector] public const float IK_DRAG = 10.0f;
-  [HideInInspector] public const float IK_GRAVITY = 1.0f;
+  [HideInInspector] public const float IK_GRAVITY = 0.8f;
   [HideInInspector] public const float IK_MASS = 1.0f;
 
   // Input Game Objects
