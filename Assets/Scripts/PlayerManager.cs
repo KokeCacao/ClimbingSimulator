@@ -341,7 +341,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // camera follow
-    _camera.transform.position = new Vector3(0, _player.transform.position.y, -10);
+    _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
   }
 
   private void FixedUpdate()

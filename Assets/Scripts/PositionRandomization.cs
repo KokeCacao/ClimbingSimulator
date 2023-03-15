@@ -11,7 +11,7 @@ public class PositionRandomization : MonoBehaviour
 
   public float ROCK_RADIUS = 0.8f; // this is good
 
-  private float ROW_HEIGHT = 2f;
+  private float ROW_HEIGHT = 1.3f;
 
   private float COL_WIDTH = 2f;
 
