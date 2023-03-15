@@ -130,7 +130,7 @@ public class PlayerManager : MonoBehaviour
       _leftHandJoint.enabled = true;
       _leftHandJoint.connectedBody = _worldRigidbody;
       _leftHandJoint.anchor = Vector2.zero;
-      _leftHandJoint.connectedAnchor = _leftHand.transform.position;
+      _leftHandJoint.connectedAnchor = _leftHand.transform.position - _worldRigidbody.transform.position;
       _leftHandJoint.autoConfigureConnectedAnchor = false;
       _leftHandJoint.useLimits = false;
       _leftHandJoint.useMotor = false;
@@ -163,7 +163,7 @@ public class PlayerManager : MonoBehaviour
       _rightHandJoint.enabled = true;
       _rightHandJoint.connectedBody = _worldRigidbody;
       _rightHandJoint.anchor = Vector2.zero;
-      _rightHandJoint.connectedAnchor = _rightHand.transform.position;
+      _rightHandJoint.connectedAnchor = _rightHand.transform.position - _worldRigidbody.transform.position;
       _rightHandJoint.autoConfigureConnectedAnchor = false;
       _rightHandJoint.useLimits = false;
       _rightHandJoint.useMotor = false;
@@ -192,11 +192,6 @@ public class PlayerManager : MonoBehaviour
   }
 
   void Awake()
-  {
-  }
-
-
-  void Start()
   {
     // assert not null
     Debug.Assert(_gameManager == null);
@@ -285,6 +280,11 @@ public class PlayerManager : MonoBehaviour
     _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
     _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
+  }
+
+
+  void Start()
+  {
   }
 
   void Update()
