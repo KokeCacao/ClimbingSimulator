@@ -12,13 +12,15 @@ public class PositionRandomization : MonoBehaviour
     
     private float totalheight = 1900f;
     
-    private float rowheight = 200f;
+    private float rowheight = 100f;
     
-    private float totalwidth = 440f;
+    private float totalwidth = 420f;
     
-    private float colwidth = 200f;
+    private float colwidth = 100f;
+
+    private float spacing = 10f;
     
-    private float x0 = 0f;
+    private float x0 = 20f;
     
     private float y0 = 0f;
     
@@ -66,7 +68,7 @@ public class PositionRandomization : MonoBehaviour
 
     
     GameObject InstantiateRock(float x1, float x2, float y1, float y2){
-        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
+        Vector2 newpos = new Vector2((Random.Range(x1+spacing,x2-spacing)),(Random.Range(y1+spacing,y2-spacing)));
         GameObject newRock = Instantiate(Rock);
         newRock.transform.position = newpos;
         int randomRock = Random.Range(1,18);
@@ -137,13 +139,14 @@ public class PositionRandomization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        totalheight = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.y*50;
-        totalwidth = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.x*50;
-
+        totalheight = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.y*50 - 40;  // *scale -spacing on sides
+        totalwidth = Background.GetComponent<SpriteRenderer>().sprite.bounds.size.x*50 - 40;
+        print("totalheight" + totalheight);
+        print("totalwidth" + totalwidth);
         int[] path_prev_col = new int[numpaths];
 
-        int numrows  = (int)(totalheight/rowheight) + 1;
-        int numcols = (int)(totalwidth/colwidth) + 1;
+        int numrows  = (int)(totalheight/rowheight) +1;
+        int numcols = (int)(totalwidth/colwidth) ;
         print("numrows" + numrows);
         print("numcols" + numcols);
 
@@ -159,9 +162,7 @@ public class PositionRandomization : MonoBehaviour
 
             float x1 = x0 + (float)path_prev_col[p]*colwidth;
             float x2 = x1 + colwidth;
-            Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
             GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-            newRock.transform.position = newpos;
             // var cubeRenderer = newRock.GetComponent<Renderer>();
             // cubeRenderer.material.SetColor("_Color", Color.red);
 
@@ -181,7 +182,7 @@ public class PositionRandomization : MonoBehaviour
                 print("oldp" + oldp);
                 if (oldp == 0){ //leftmost
                     if (grids_filled[0] == 1 && grids_filled[1] == 1){
-                        newp = (int)Random.Range((int)(1),(int)(2));  //not instantiate
+                        newp = 1;  //not instantiate //not use col 0
                         path_prev_col[p] = newp;
                     }
                     else if (grids_filled[0]== 1){
@@ -190,32 +191,22 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                         GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
                     }
                     else if (grids_filled[1]== 1){
-                        newp = 0;
+                        newp = 1;  //not instantiate //not use col 0
                         path_prev_col[p] = newp;
-                        grids_filled[newp] = 1;
-                        float x1 = x0 + newp*colwidth;
-                        float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
                     }
                     else {
-                        newp = (int)Random.Range((int)(0),(int)(2)); //int random is exclusive
+                        newp = 1;//(int)Random.Range((int)(0),(int)(2)); //int random is exclusive
                         path_prev_col[p] = newp;
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                         GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
                     }
                 }
-                else if (oldp == numcols-1){ // too large
+                else if (oldp == numcols-1){ // last column 
                     if (grids_filled[oldp] == 1 && grids_filled[oldp-1] == 1){
                         newp = (int)Random.Range((int)(oldp),(int)(oldp+1));  //not instantiate
                         path_prev_col[p] = newp;
@@ -226,29 +217,23 @@ public class PositionRandomization : MonoBehaviour
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                         GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
                     }
                     else if (grids_filled[oldp-1] == 1){
-                        newp = oldp;
+                        newp = oldp-1;
                         path_prev_col[p] = newp;
                         grids_filled[newp] = 1;
-                        float x1 = x0 + newp*colwidth;
-                        float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-                        GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
+                        //float x1 = x0 + newp*colwidth;  //not instantiate
+                        //float x2 = x1+ colwidth;
+                        //GameObject newRock = InstantiateRock(x1,x2,y1,y2);
                     }
                     else{
-                        newp = (int)Random.Range((int)(oldp-1),(int)(oldp+1)); //int random is exclusive
+                        newp = (int)(oldp-1);//(int)Random.Range((int)(oldp-1),(int)(oldp+1)); //int random is exclusive
                         path_prev_col[p] = newp;
                         grids_filled[newp] = 1;
                         float x1 = x0 + newp*colwidth;
                         float x2 = x1+ colwidth;
-                        Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                         GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                        newRock.transform.position = newpos;
                     }
                 }
                 else if (grids_filled[oldp-1] == 1 && grids_filled[oldp] == 1 && grids_filled[oldp+1] == 1){
@@ -261,9 +246,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else if (grids_filled[oldp] == 1 && grids_filled[oldp + 1] == 1){
                     newp = oldp -1;
@@ -271,9 +254,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else if (grids_filled[oldp-1] == 1 && grids_filled[oldp + 1] == 1){
                     newp = oldp;
@@ -281,9 +262,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else if (grids_filled[oldp-1] == 1){
                     newp = (int)(Random.Range((int)(oldp),(int)(oldp+2)));
@@ -291,9 +270,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else if (grids_filled[oldp] == 1){
                     int randval = (int)(Random.Range((int)(0), (int)(2)));
@@ -307,9 +284,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else if (grids_filled[oldp+1] == 1){
                     newp = (int)(Random.Range((int)(oldp-1),(int)(oldp+1)));
@@ -317,9 +292,7 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 else{
                     newp = (Random.Range((int)(oldp-1),(int)(oldp+2)));
@@ -328,50 +301,17 @@ public class PositionRandomization : MonoBehaviour
                     grids_filled[newp] = 1;
                     float x1 = x0 + newp*colwidth;
                     float x2 = x1+ colwidth;
-                    Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
                     GameObject newRock = InstantiateRock(x1,x2,y1,y2);
-                    newRock.transform.position = newpos;
                 }
                 
-                for(int n = 0; n < numcols; n++){
+                
+            }
+
+            for(int n = 0; n < numcols; n++){
                     grids_filled[n] = 0;    
-                }
             }
         }
     }
-
-    
-    //old random position function 
-    // void Start()
-    // {
-
-    //     firstRock.transform.position = new Vector3(0,0,0);
-    //     float x0 = -35f;
-    //     float xfinal = 35f;
-    //     float x1 = x0;
-    //     float x2 = x0;
-    //     float colsize = 15f;
-        
-    //     while(x2 < xfinal){
-    //         x2 = x1 + colsize;
-
-    //         float y0 = -20f;
-    //         float yfinal = 20f;
-    //         float y1 = x0;
-    //         float y2 = x0;
-    //         float rowsize = 10f;
-
-    //         while(y2 < yfinal){
-    //             y2 = y1 + rowsize;
-    //             Vector2 newpos = new Vector2((Random.Range(x1,x2)),(Random.Range(y1,y2)));
-    //             GameObject newRock = Instantiate(Rock);
-    //             newRock.transform.position = newpos;
-    //             y1 = y2;
-    //         }
-            
-    //         x1 = x2;
-    //     }
-    // }
 
     // Update is called once per frame
     void Update()
