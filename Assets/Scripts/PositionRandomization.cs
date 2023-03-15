@@ -9,7 +9,7 @@ public class PositionRandomization : MonoBehaviour
   private GameObject background;
   public const string ROCK_TAG = "rock";
 
-  public float ROCK_RADIUS = 0.8f; // this is good
+  [HideInInspector] public float ROCK_RADIUS = 0.8f; // this is good
 
   private float ROW_HEIGHT = 1.3f;
 
