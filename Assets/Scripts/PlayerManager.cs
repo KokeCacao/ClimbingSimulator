@@ -60,22 +60,44 @@ public class PlayerManager : MonoBehaviour
 
   // These are initialized directly
   [HideInInspector] private Controls controls;
-  public void OnPlayerJoined(PlayerInput playerInput)
+  [HideInInspector] private int playerIndex;
+  [HideInInspector] private int deviceIndex;
+
+  public void OnControlsChanged(PlayerInput playerInput)
   {
     playerInput.camera = _camera;
-    Debug.Log("Player joined: " + playerInput.playerIndex);
-    // Perform additional tasks when a player joins
+    if (controls == null)
+    {
+      controls = new Controls();
+    }
+
+    print("Player " + playerInput.playerIndex + " joined");
+    playerIndex = playerInput.playerIndex;
+    deviceIndex = -1;
+
+    controls.ActionMap.LeftGrab.performed += ctx => OnLeftGrabEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.LeftGrab.canceled += ctx => OnLeftGrabEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.RightGrab.performed += ctx => OnRightGrabEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.RightGrab.canceled += ctx => OnRightGrabEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.LeftArm.performed += ctx => OnLeftMoveEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.LeftArm.canceled += ctx => OnLeftMoveEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.RightArm.performed += ctx => OnRightMoveEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.RightArm.canceled += ctx => OnRightMoveEvent(ctx, playerInput.playerIndex);
+    controls.Enable();
   }
 
-  public void OnPlayerLeft(PlayerInput playerInput)
-  {
-    Debug.Log("Player left: " + playerInput.playerIndex);
-    // Perform additional tasks when a player leaves
+  private bool isValidInput(InputAction.CallbackContext context) {
+    if (deviceIndex == -1) {
+      deviceIndex = context.control.device.deviceId;
+      return true;
+    }
+    return deviceIndex == context.control.device.deviceId;
   }
 
   // Now start Event Handlers
-  private void OnLeftGrabEvent(InputAction.CallbackContext context)
+  private void OnLeftGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
+    if (!isValidInput(context)) return;
     leftGrab = context.ReadValueAsButton();
 
     // update _leftAim with red color
@@ -105,8 +127,9 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-  private void OnRightGrabEvent(InputAction.CallbackContext context)
+  private void OnRightGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
+    if (!isValidInput(context)) return;
     rightGrab = context.ReadValueAsButton();
 
     // update _rightAim with red color
@@ -136,16 +159,18 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-  private void OnLeftMoveEvent(InputAction.CallbackContext context)
+  private void OnLeftMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
+    if (!isValidInput(context)) return;
     leftStick = (Vector2)_leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
 
     // update _leftAim
     _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
   }
 
-  private void OnRightMoveEvent(InputAction.CallbackContext context)
+  private void OnRightMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
+    if (!isValidInput(context)) return;
     rightStick = (Vector2)_rightBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
 
     // update _rightAim
@@ -282,19 +307,6 @@ public class PlayerManager : MonoBehaviour
 
   private void OnEnable()
   {
-    if (controls == null)
-    {
-      controls = new Controls();
-      controls.ActionMap.LeftGrab.performed += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.LeftGrab.canceled += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.RightGrab.performed += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.RightGrab.canceled += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.LeftArm.performed += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.LeftArm.canceled += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.RightArm.performed += ctx => OnRightMoveEvent(ctx);
-      controls.ActionMap.RightArm.canceled += ctx => OnRightMoveEvent(ctx);
-      controls.Enable();
-    }
   }
 
   private void OnDisable()
