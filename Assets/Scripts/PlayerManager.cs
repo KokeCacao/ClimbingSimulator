@@ -19,6 +19,13 @@ public class PlayerManager : MonoBehaviour
   [SerializeField] private Vector2 _virtualRightAim;
   [SerializeField] private Camera _camera;
 
+  // Sprites
+  [SerializeField] private Sprite _handReleaseSprite;
+  [SerializeField] private Sprite _handGrabSprite;
+  [SerializeField] private Sprite _humerusSprite;
+  [SerializeField] private Sprite _radiusSprite;
+  [SerializeField] private Sprite _playerTreeSprite;
+
   // These are automatically based on above
   [HideInInspector] private GameManager _gameManager;
   [HideInInspector] private GameObject _leftHumerus;
@@ -77,7 +84,7 @@ public class PlayerManager : MonoBehaviour
       controls = new Controls();
     }
 
-    print("Player " + playerInput.playerIndex + " joined");
+    Debug.Log("Player " + playerInput.playerIndex + " joined");
     playerIndex = playerInput.playerIndex;
     deviceIndex = -1;
 
@@ -96,6 +103,7 @@ public class PlayerManager : MonoBehaviour
   {
     if (deviceIndex == -1)
     {
+      Debug.Log("New device detected");
       deviceIndex = context.control.device.deviceId;
       return true;
     }
@@ -110,6 +118,7 @@ public class PlayerManager : MonoBehaviour
 
     // update _leftAim with red color
     _leftAim.GetComponent<SpriteRenderer>().color = leftGrab ? Color.red : Color.gray;
+    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSprite : _handReleaseSprite;
 
     // if grabbing, add a hinge joint at hand position
     if (leftGrab)
@@ -142,6 +151,7 @@ public class PlayerManager : MonoBehaviour
 
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
+    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSprite : _handReleaseSprite;
 
     // if grabbing, add a hinge joint at hand position
     if (rightGrab)
@@ -195,6 +205,10 @@ public class PlayerManager : MonoBehaviour
     Debug.Assert(_player != null);
     Debug.Assert(_leftAim != null);
     Debug.Assert(_rightAim != null);
+    Debug.Assert(_handGrabSprite != null);
+    Debug.Assert(_handReleaseSprite != null);
+    Debug.Assert(_virtualLeftAim != null);
+    Debug.Assert(_virtualRightAim != null);
 
     // get children game objects of _player
     _body = _player.transform.Find("Body").gameObject;
@@ -221,6 +235,13 @@ public class PlayerManager : MonoBehaviour
     _rightRadiusHumerusJoint = _rightRadius.GetComponent<HingeJoint2D>();
     _rightHandRadiusJoint = _rightHand.GetComponent<HingeJoint2D>();
 
+    Debug.Assert(_leftHumerusBodyJoint != null);
+    Debug.Assert(_leftRadiusHumerusJoint != null);
+    Debug.Assert(_leftHandRadiusJoint != null);
+    Debug.Assert(_rightHumerusBodyJoint != null);
+    Debug.Assert(_rightRadiusHumerusJoint != null);
+    Debug.Assert(_rightHandRadiusJoint != null);
+
     // get components: rigidbody
     _worldRigidbody = _gameManager.world.GetComponent<Rigidbody2D>();
     _leftHumerusRigidbody = _leftHumerus.GetComponent<Rigidbody2D>();
@@ -229,6 +250,14 @@ public class PlayerManager : MonoBehaviour
     _rightHumerusRigidbody = _rightHumerus.GetComponent<Rigidbody2D>();
     _rightRadiusRigidbody = _rightRadius.GetComponent<Rigidbody2D>();
     _rightHandRigidbody = _rightHand.GetComponent<Rigidbody2D>();
+
+    Debug.Assert(_worldRigidbody != null);
+    Debug.Assert(_leftHumerusRigidbody != null);
+    Debug.Assert(_leftRadiusRigidbody != null);
+    Debug.Assert(_leftHandRigidbody != null);
+    Debug.Assert(_rightHumerusRigidbody != null);
+    Debug.Assert(_rightRadiusRigidbody != null);
+    Debug.Assert(_rightHandRigidbody != null);
 
     // set rigidbody angular drag
     _leftHumerusRigidbody.angularDrag = IK_DRAG;
@@ -246,7 +275,16 @@ public class PlayerManager : MonoBehaviour
         rigidBody.mass = IK_MASS;
     }
 
-
+    // change player sprite
+    GameObject bodySprite = _body.transform.Find("BodySprite").gameObject;
+    GameObject playerTree = bodySprite.transform.Find("PlayerTree").gameObject;
+    playerTree.GetComponent<SpriteRenderer>().sprite = _playerTreeSprite;
+    _leftHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
+    _leftRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
+    _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
+    _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
+    _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
+    _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
   }
 
   void Update()
