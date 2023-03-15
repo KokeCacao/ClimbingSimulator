@@ -15,27 +15,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftGrab1",
-                    "type": "Button",
-                    "id": "1e010d8d-ad4d-4650-9204-8ad1eafc0558",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RightGrab",
                     "type": "Button",
                     "id": "d37e5907-4a42-4e4d-b7e0-626408f4d529",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RightGrab1",
-                    "type": "Button",
-                    "id": "37c9b074-153b-411f-9d52-1025aec97062",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -51,27 +33,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LeftArm1",
-                    "type": "Value",
-                    "id": "797b8ac3-41a0-4068-be51-b25169cc759b",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "RightArm",
                     "type": "Value",
                     "id": "9682efd7-e5bd-4c1f-8c7a-8887304d4f95",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "RightArm1",
-                    "type": "Value",
-                    "id": "3bcfb2a4-56f4-4858-b9aa-a01ce3a70de4",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -122,53 +86,21 @@
                     "action": "RightArm",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "769001e9-6d9f-468e-a0b9-2b147618e869",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftGrab1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2a60e8e9-1f7f-4b93-95dd-386853dd0107",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightGrab1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "44c5f448-5b3c-4a43-8cd5-5afb8a07f8fc",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftArm1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f32b6261-9591-4147-a755-843a5addb16a",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightArm1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Control Scheme",
+            "bindingGroup": "Control Scheme",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

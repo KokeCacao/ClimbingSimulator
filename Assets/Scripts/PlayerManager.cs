@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,13 +10,13 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public const float IK_DRAG = 100.0f;
 
   // Input Game Objects
-  public float playerNumber = 0;
-  [SerializeField] private GameManager _gameManager;
   [SerializeField] private GameObject _player;
   [SerializeField] private GameObject _leftAim;
   [SerializeField] private GameObject _rightAim;
+  [SerializeField] private Camera _camera;
 
   // These are automatically based on above
+  [HideInInspector] private GameManager _gameManager;
   [HideInInspector] private GameObject _leftHumerus;
   [HideInInspector] private GameObject _leftRadius;
   [HideInInspector] private GameObject _leftHand;
@@ -62,6 +60,18 @@ public class PlayerManager : MonoBehaviour
 
   // These are initialized directly
   [HideInInspector] private Controls controls;
+  public void OnPlayerJoined(PlayerInput playerInput)
+  {
+    playerInput.camera = _camera;
+    Debug.Log("Player joined: " + playerInput.playerIndex);
+    // Perform additional tasks when a player joins
+  }
+
+  public void OnPlayerLeft(PlayerInput playerInput)
+  {
+    Debug.Log("Player left: " + playerInput.playerIndex);
+    // Perform additional tasks when a player leaves
+  }
 
   // Now start Event Handlers
   private void OnLeftGrabEvent(InputAction.CallbackContext context)
@@ -74,7 +84,8 @@ public class PlayerManager : MonoBehaviour
     // if grabbing, add a hinge joint at hand position
     if (leftGrab)
     {
-      if (_leftHandJoint == null) {
+      if (_leftHandJoint == null)
+      {
         _leftHandJoint = _leftHand.AddComponent<HingeJoint2D>();
       }
       _leftHandJoint.enabled = true;
@@ -87,7 +98,8 @@ public class PlayerManager : MonoBehaviour
     }
     else
     {
-      if (_leftHandJoint != null) {
+      if (_leftHandJoint != null)
+      {
         _leftHandJoint.enabled = false;
       }
     }
@@ -99,11 +111,12 @@ public class PlayerManager : MonoBehaviour
 
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
-    
+
     // if grabbing, add a hinge joint at hand position
     if (rightGrab)
     {
-      if (_rightHandJoint == null) {
+      if (_rightHandJoint == null)
+      {
         _rightHandJoint = _rightHand.AddComponent<HingeJoint2D>();
       }
       _rightHandJoint.enabled = true;
@@ -116,7 +129,8 @@ public class PlayerManager : MonoBehaviour
     }
     else
     {
-      if (_rightHandJoint != null) {
+      if (_rightHandJoint != null)
+      {
         _rightHandJoint.enabled = false;
       }
     }
@@ -124,7 +138,7 @@ public class PlayerManager : MonoBehaviour
 
   private void OnLeftMoveEvent(InputAction.CallbackContext context)
   {
-    leftStick = (Vector2) _leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
+    leftStick = (Vector2)_leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
 
     // update _leftAim
     _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
@@ -132,7 +146,7 @@ public class PlayerManager : MonoBehaviour
 
   private void OnRightMoveEvent(InputAction.CallbackContext context)
   {
-    rightStick = (Vector2) _rightBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
+    rightStick = (Vector2)_rightBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
 
     // update _rightAim
     _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
@@ -140,40 +154,15 @@ public class PlayerManager : MonoBehaviour
 
   void Awake()
   {
-    controls = new Controls();
-    if (playerNumber == 0)
-    {
-      controls.ActionMap.LeftGrab.performed += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.LeftGrab.canceled += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.RightGrab.performed += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.RightGrab.canceled += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.LeftArm.performed += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.LeftArm.canceled += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.RightArm.performed += ctx => OnRightMoveEvent(ctx);
-      controls.ActionMap.RightArm.canceled += ctx => OnRightMoveEvent(ctx);
-    }
-    else if (playerNumber == 1)
-    {
-      controls.ActionMap.LeftGrab1.performed += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.LeftGrab1.canceled += ctx => OnLeftGrabEvent(ctx);
-      controls.ActionMap.RightGrab1.performed += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.RightGrab1.canceled += ctx => OnRightGrabEvent(ctx);
-      controls.ActionMap.LeftArm1.performed += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.LeftArm1.canceled += ctx => OnLeftMoveEvent(ctx);
-      controls.ActionMap.RightArm1.performed += ctx => OnRightMoveEvent(ctx);
-      controls.ActionMap.RightArm1.canceled += ctx => OnRightMoveEvent(ctx);
-    }
-    else
-    {
-      Debug.LogError("Player number must be 1 or 0");
-    }
   }
 
 
   void Start()
   {
     // assert not null
-    Debug.Assert(_gameManager != null);
+    Debug.Assert(_gameManager == null);
+    _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     Debug.Assert(_player != null);
     Debug.Assert(_leftAim != null);
     Debug.Assert(_rightAim != null);
@@ -237,7 +226,7 @@ public class PlayerManager : MonoBehaviour
     _rightBody2HumerusPoint = _rightHumerus.transform.TransformPoint(_rightHumerusBodyJoint.anchor);
     _rightHumerus2RadiusPoint = _rightRadius.transform.TransformPoint(_rightRadiusHumerusJoint.anchor);
     _rightRadius2HandPoint = _rightHand.transform.TransformPoint(_rightHandRadiusJoint.anchor);
-    
+
 
     // Calculate IK: gradient to _leftAim position
 
@@ -293,11 +282,26 @@ public class PlayerManager : MonoBehaviour
 
   private void OnEnable()
   {
-    controls.Enable();
+    if (controls == null)
+    {
+      controls = new Controls();
+      controls.ActionMap.LeftGrab.performed += ctx => OnLeftGrabEvent(ctx);
+      controls.ActionMap.LeftGrab.canceled += ctx => OnLeftGrabEvent(ctx);
+      controls.ActionMap.RightGrab.performed += ctx => OnRightGrabEvent(ctx);
+      controls.ActionMap.RightGrab.canceled += ctx => OnRightGrabEvent(ctx);
+      controls.ActionMap.LeftArm.performed += ctx => OnLeftMoveEvent(ctx);
+      controls.ActionMap.LeftArm.canceled += ctx => OnLeftMoveEvent(ctx);
+      controls.ActionMap.RightArm.performed += ctx => OnRightMoveEvent(ctx);
+      controls.ActionMap.RightArm.canceled += ctx => OnRightMoveEvent(ctx);
+      controls.Enable();
+    }
   }
 
   private void OnDisable()
   {
-    controls.Disable();
+    if (controls != null)
+    {
+      controls.Disable();
+    }
   }
 }
