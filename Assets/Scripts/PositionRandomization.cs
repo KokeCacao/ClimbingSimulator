@@ -18,7 +18,7 @@ public class PositionRandomization : MonoBehaviour
 
   private float x0 = 0f;
 
-  private float y0 = 0f;
+  private float y0 = -2f;
 
   private int N_PATHS = 3;
 
