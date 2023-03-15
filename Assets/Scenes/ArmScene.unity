@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rock: {fileID: 315908651115096184, guid: 76330c7e2868f4474ab196db9945528a, type: 3}
   background: {fileID: 1440105777}
+  ROCK_RADIUS: 0.5
   rocks:
   - {fileID: 21300000, guid: 717808be44822447c86c8837e73b9c59, type: 3}
   - {fileID: 21300000, guid: 2b5516a4530af475b9ee82cb35916d2b, type: 3}
@@ -526,6 +527,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 225554586863125176, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
+      propertyPath: indicatorPrefab
+      value: 
+      objectReference: {fileID: 315908651115096184, guid: 76330c7e2868f4474ab196db9945528a, type: 3}
+    - target: {fileID: 225554586863125176, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
+      propertyPath: positionRandomization
+      value: 
+      objectReference: {fileID: 866296071}
     - target: {fileID: 225554586863125177, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -573,6 +582,10 @@ PrefabInstance:
     - target: {fileID: 225554586863125179, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225554586939166628, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 225554586939166631, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
       propertyPath: m_Simulated

@@ -7,6 +7,9 @@ public class PositionRandomization : MonoBehaviour
 
   [SerializeField]
   private GameObject background;
+  public const string ROCK_TAG = "rock";
+
+  public float ROCK_RADIUS = 0.8f; // this is good
 
   private float ROW_HEIGHT = 2f;
 
@@ -36,6 +39,23 @@ public class PositionRandomization : MonoBehaviour
     newRock.transform.position -= new Vector3(backgroundDimension.x / 2f, 0f, 0f);
     newRock.GetComponent<SpriteRenderer>().sprite = rocks[Random.Range(0, rocks.Length)];
     return newRock;
+  }
+
+  public GameObject canGrab(Vector2 pos) {
+    GameObject[] rocksInGame = GameObject.FindGameObjectsWithTag(ROCK_TAG);
+    foreach (GameObject rock in rocksInGame) {
+      float rocky = rock.transform.position.y;
+      Vector2 rockPos = (Vector2) rock.transform.position;
+      float dist = Vector2.Distance(rockPos,pos);
+      if (dist < ROCK_RADIUS){
+        return rock;
+      }
+    }
+    return null;
+  }
+
+  public GameObject[] getRocks() {
+    return GameObject.FindGameObjectsWithTag(ROCK_TAG);
   }
 
   private void OnEnable() {

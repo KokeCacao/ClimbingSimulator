@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
   // Global Constants
+  [HideInInspector] public const bool DEBUG = false;
+  [HideInInspector] public const bool CHEATING = true;
   [HideInInspector] public const float ARM_LENGTH = 2.0f;
   [HideInInspector] public const float IK_SPEED = 100.0f;
   [HideInInspector] public const float IK_DRAG_BASE = 1.0f;
@@ -76,6 +78,10 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] private int playerIndex;
   [HideInInspector] private int deviceIndex;
 
+  // These are set by GameManager
+  [HideInInspector] public GameObject leftIndicator;
+  [HideInInspector] public GameObject rightIndicator;
+
   public void OnControlsChanged(PlayerInput playerInput)
   {
     playerInput.camera = _camera;
@@ -121,16 +127,18 @@ public class PlayerManager : MonoBehaviour
     _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSprite : _handReleaseSprite;
 
     // if grabbing, add a hinge joint at hand position
-    if (leftGrab)
+    GameObject grabbed = _gameManager.positionRandomization.canGrab(_leftHand.transform.position);
+    if (leftGrab && grabbed != null)
     {
       if (_leftHandJoint == null)
       {
         _leftHandJoint = _leftHand.AddComponent<HingeJoint2D>();
       }
+      Vector3 grabbingPosition = CHEATING ? grabbed.transform.position : _leftHand.transform.position;
       _leftHandJoint.enabled = true;
       _leftHandJoint.connectedBody = _worldRigidbody;
       _leftHandJoint.anchor = Vector2.zero;
-      _leftHandJoint.connectedAnchor = _leftHand.transform.position - _worldRigidbody.transform.position;
+      _leftHandJoint.connectedAnchor = grabbingPosition - _worldRigidbody.transform.position;
       _leftHandJoint.autoConfigureConnectedAnchor = false;
       _leftHandJoint.useLimits = false;
       _leftHandJoint.useMotor = false;
@@ -154,16 +162,18 @@ public class PlayerManager : MonoBehaviour
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSprite : _handReleaseSprite;
 
     // if grabbing, add a hinge joint at hand position
-    if (rightGrab)
+    GameObject grabbed = _gameManager.positionRandomization.canGrab(_rightHand.transform.position);
+    if (rightGrab && grabbed != null)
     {
       if (_rightHandJoint == null)
       {
         _rightHandJoint = _rightHand.AddComponent<HingeJoint2D>();
       }
+      Vector3 grabbingPosition = CHEATING ? grabbed.transform.position : _rightHand.transform.position;
       _rightHandJoint.enabled = true;
       _rightHandJoint.connectedBody = _worldRigidbody;
       _rightHandJoint.anchor = Vector2.zero;
-      _rightHandJoint.connectedAnchor = _rightHand.transform.position - _worldRigidbody.transform.position;
+      _rightHandJoint.connectedAnchor = grabbingPosition - _worldRigidbody.transform.position;
       _rightHandJoint.autoConfigureConnectedAnchor = false;
       _rightHandJoint.useLimits = false;
       _rightHandJoint.useMotor = false;
@@ -193,6 +203,9 @@ public class PlayerManager : MonoBehaviour
 
   void Awake()
   {
+    _leftAim.SetActive(DEBUG);
+    _rightAim.SetActive(DEBUG);
+
     // assert not null
     Debug.Assert(_gameManager == null);
     _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -266,8 +279,8 @@ public class PlayerManager : MonoBehaviour
     Rigidbody2D[] rigidBodies = GetComponentsInChildren<Rigidbody2D>(true);
     foreach (Rigidbody2D rigidBody in rigidBodies)
     {
-        rigidBody.gravityScale = IK_GRAVITY;
-        rigidBody.mass = IK_MASS;
+      rigidBody.gravityScale = IK_GRAVITY;
+      rigidBody.mass = IK_MASS;
     }
 
     // change player sprite
@@ -280,6 +293,21 @@ public class PlayerManager : MonoBehaviour
     _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite;
     _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite;
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSprite;
+
+    // add itself to GameManager
+    _gameManager.players.Add(this);
+  }
+
+  public Vector2 getHandPosition(bool isLeft)
+  {
+    if (isLeft)
+    {
+      return _leftHand.transform.position;
+    }
+    else
+    {
+      return _rightHand.transform.position;
+    }
   }
 
 
@@ -291,12 +319,14 @@ public class PlayerManager : MonoBehaviour
   {
     _virtualLeftAim = leftStick;
     _virtualRightAim = rightStick;
-    
-    if (!leftGrab) {
+
+    if (!leftGrab)
+    {
 
       _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
     }
-    if (!rightGrab) {
+    if (!rightGrab)
+    {
 
       _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
     }

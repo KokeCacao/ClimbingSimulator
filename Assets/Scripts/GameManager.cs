@@ -7,6 +7,12 @@ public class GameManager : MonoBehaviour
 {
 
   [SerializeField] public GameObject world;
+  [SerializeField] public GameObject indicatorPrefab;
+
+  [SerializeField] public PositionRandomization positionRandomization;
+
+  public List<PlayerManager> players;
+
   void Awake()
   {
   }
@@ -26,6 +32,10 @@ public class GameManager : MonoBehaviour
 
   void OnEnable()
   {
+    Debug.Assert(world != null, "World is null");
+    Debug.Assert(positionRandomization != null, "PositionRandomization is null");
+    Debug.Assert(indicatorPrefab != null, "IndicatorPrefab is null");
+    players = new List<PlayerManager>();
   }
 
   void OnDisable()
@@ -38,7 +48,39 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
-
+    GameObject[] rocks = positionRandomization.getRocks();
+      foreach (PlayerManager player in players)
+      {
+        Vector2 leftHandPos = player.getHandPosition(true);
+        Vector2 rightHandPos = player.getHandPosition(false);
+        
+        GameObject leftRock = positionRandomization.canGrab(leftHandPos);
+        GameObject rightRock = positionRandomization.canGrab(rightHandPos);
+        if (leftRock != null) {
+          if (player.leftIndicator == null) {
+            player.leftIndicator = Instantiate(indicatorPrefab);
+            player.leftIndicator.transform.parent = world.transform;
+          }
+          player.leftIndicator.transform.position = leftRock.transform.position;
+          player.leftIndicator.SetActive(true);
+        } else {
+          if (player.leftIndicator != null) {
+            player.leftIndicator.SetActive(false);
+          }
+        }
+        if (rightRock != null) {
+          if (player.rightIndicator == null) {
+            player.rightIndicator = Instantiate(indicatorPrefab);
+            player.rightIndicator.transform.parent = world.transform;
+          }
+          player.rightIndicator.transform.position = rightRock.transform.position;
+          player.rightIndicator.SetActive(true);
+        } else {
+          if (player.rightIndicator != null) {
+            player.rightIndicator.SetActive(false);
+          }
+        }
+      }
   }
 
   void FixedUpdate()
