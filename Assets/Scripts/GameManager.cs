@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
   [SerializeField] public GameObject indicatorPrefab;
 
   [SerializeField] public PositionRandomization positionRandomization;
+  [SerializeField] public Minimap minimap;
 
   public List<PlayerManager> players;
 
@@ -82,7 +83,10 @@ public class GameManager : MonoBehaviour
             player.rightIndicator.SetActive(false);
           }
         }
+
+      minimap.MinimapUpdate(player, player._playerHeadMinimap, player.playerIndex);
       }
+    
   }
 
   void FixedUpdate()

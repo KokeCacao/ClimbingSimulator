@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
   [SerializeField] private Sprite[] _playerTreeSprite;
 
   //Sprite Heads for minimap
-  [SerializeField] private Sprite[] _playerHeadMinimap;
+  [SerializeField] public GameObject[] _playerHeadMinimap;
 
   // These are automatically based on above
   [HideInInspector] private GameManager _gameManager;
@@ -77,10 +77,10 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public Vector2 rightStick;
   [HideInInspector] public Vector2 leftControlerInput;
   [HideInInspector] public Vector2 rightControlerInput;
-
+  
   // These are initialized directly
   [HideInInspector] private Controls controls;
-  [HideInInspector] private int playerIndex;
+  [HideInInspector] public int playerIndex;
   [HideInInspector] private int deviceIndex;
 
   // These are set by GameManager
@@ -164,6 +164,7 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
+
   public void OnRightGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
@@ -242,6 +243,8 @@ public class PlayerManager : MonoBehaviour
     _rightHumerus = _body.transform.Find("RightHumerus").gameObject;
     _rightRadius = _body.transform.Find("RightRadius").gameObject;
     _rightHand = _body.transform.Find("RightHand").gameObject;
+
+    //_playerHead = _player.transform.Find("Player Head").gameObject;
 
     Debug.Assert(_body != null);
     Debug.Assert(_leftHumerus != null);
