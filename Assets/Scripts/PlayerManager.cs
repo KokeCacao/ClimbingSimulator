@@ -10,8 +10,11 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public const float IK_SPEED = 100.0f;
   [HideInInspector] public const float IK_DRAG_BASE = 1.0f;
   [HideInInspector] public const float IK_DRAG = 10.0f;
-  [HideInInspector] public const float IK_GRAVITY = 0.8f;
-  [HideInInspector] public const float IK_MASS = 1.0f;
+  [HideInInspector] public const float IK_GRAVITY = 1.0f;
+  [HideInInspector] public const float IK_MASS_BODY = 1.5f;
+  [HideInInspector] public const float IK_MASS_ARM = 0.8f;
+  [HideInInspector] public const float IK_ANGULAR_DRAG_ARM = 0.05f;
+  [HideInInspector] public const float IK_ANGULAR_DRAG_BODY = 0.35f;
 
   // Input Game Objects
   [SerializeField] private GameObject _player;
@@ -206,14 +209,14 @@ public class PlayerManager : MonoBehaviour
   {
     if (!isValidInput(context)) return;
     leftControlerInput = context.ReadValue<Vector2>();
-    leftStick = (Vector2)_leftBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
+    leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
   }
 
   public void OnRightMoveEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
     rightControlerInput = context.ReadValue<Vector2>();
-    rightStick = (Vector2)_rightBody2HumerusPoint + context.ReadValue<Vector2>() * ARM_LENGTH;
+    rightStick = (Vector2)_rightBody2HumerusPoint + rightControlerInput * ARM_LENGTH;
   }
 
   void Awake()
@@ -299,7 +302,8 @@ public class PlayerManager : MonoBehaviour
     foreach (Rigidbody2D rigidBody in rigidBodies)
     {
       rigidBody.gravityScale = IK_GRAVITY;
-      rigidBody.mass = IK_MASS;
+      rigidBody.mass = IK_MASS_ARM;
+      rigidBody.angularDrag = IK_ANGULAR_DRAG_ARM;
     }
 
     // change player sprite
@@ -312,6 +316,14 @@ public class PlayerManager : MonoBehaviour
     _rightHumerus.GetComponentInChildren<SpriteRenderer>().sprite = _humerusSprite[playerIndex % _humerusSprite.Length];
     _rightRadius.GetComponentInChildren<SpriteRenderer>().sprite = _radiusSprite[playerIndex % _radiusSprite.Length];
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = _handReleaseSpriteRight[playerIndex % _handReleaseSpriteRight.Length];
+
+    rigidBodies = playerTree.GetComponentsInChildren<Rigidbody2D>(true);
+    foreach (Rigidbody2D rigidBody in rigidBodies)
+    {
+      rigidBody.gravityScale = IK_GRAVITY;
+      rigidBody.mass = IK_MASS_BODY;
+      rigidBody.angularDrag = IK_ANGULAR_DRAG_BODY;
+    }
 
     // add itself to GameManager
     _gameManager.players.Add(this);
@@ -336,19 +348,22 @@ public class PlayerManager : MonoBehaviour
 
   void Update()
   {
+    leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
+    rightStick = (Vector2)_rightBody2HumerusPoint + rightControlerInput * ARM_LENGTH;
+
     // virtual aim for knowing what force to apply
     _virtualLeftAim = leftStick;
     _virtualRightAim = rightStick;
 
     // aim indicator
-    if (!leftGrab)
-    {
+    // if (!leftGrab)
+    // {
       _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
-    }
-    if (!rightGrab)
-    {
+    // }
+    // if (!rightGrab)
+    // {
       _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
-    }
+    // }
 
     // camera follow
     _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
@@ -356,6 +371,9 @@ public class PlayerManager : MonoBehaviour
 
   private void FixedUpdate()
   {
+    leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
+    rightStick = (Vector2)_rightBody2HumerusPoint + rightControlerInput * ARM_LENGTH;
+
     // update vectors based on joint component positions
     _leftBody2HumerusPoint = _leftHumerus.transform.TransformPoint(_leftHumerusBodyJoint.anchor);
     _leftHumerus2RadiusPoint = _leftRadius.transform.TransformPoint(_leftRadiusHumerusJoint.anchor);
