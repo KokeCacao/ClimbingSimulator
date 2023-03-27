@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
           }
         }
 
-      minimap.MinimapUpdate(player, player._playerHeadMinimap, player.playerIndex);
+      minimap.MinimapUpdate(player);
       }
     
   }

@@ -28,13 +28,13 @@ public class Minimap : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void MinimapUpdate(PlayerManager Player1, GameObject[] Heads, int playerIndex)
+    public void MinimapUpdate(PlayerManager Player1)
     {
-        if(playerIndex%2 == 0){
-            Head = Heads[0];
-        } else {
-            Head = Heads[1];
-        }
+        // if(playerIndex%2 == 0){
+        //     Head = Heads[0];
+        // } else {
+        //     Head = Heads[1];
+        // }
         float backgroundheight = Background.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float backgroundwidth = Background.GetComponent<SpriteRenderer>().sprite.rect.width;
         float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
