@@ -30,16 +30,12 @@ public class Minimap : MonoBehaviour
     // Update is called once per frame
     public void MinimapUpdate(PlayerManager Player1)
     {
-        // if(playerIndex%2 == 0){
-        //     Head = Heads[0];
-        // } else {
-        //     Head = Heads[1];
-        // }
-        float backgroundheight = Background.GetComponent<SpriteRenderer>().sprite.rect.height;  
+    
+        //float backgroundheight = Background.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float backgroundwidth = Background.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
+        //float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float minimapwidth = Minimap.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float head1y = Player1.transform.position.y*(minimapheight/backgroundheight);
+        float head1y = Player1.transform.position.y;//*(minimapheight/backgroundheight);
         //float head2y = Player2.transform.position.y*(minimapheight/backgroundheight);
         Vector2 Head1pos = new Vector2 (head_xpos, head1y);
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);

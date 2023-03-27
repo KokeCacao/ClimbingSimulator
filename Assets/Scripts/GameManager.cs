@@ -83,8 +83,7 @@ public class GameManager : MonoBehaviour
             player.rightIndicator.SetActive(false);
           }
         }
-
-      minimap.MinimapUpdate(player);
+        minimap.MinimapUpdate(player);
       }
     
   }
