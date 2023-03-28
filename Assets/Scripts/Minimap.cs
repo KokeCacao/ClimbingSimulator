@@ -6,10 +6,12 @@ public class Minimap : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject Head1;
+    private GameObject Head;
 
     // [SerializeField]
     // private GameObject Head2;
+    [SerializeField]
+    private float head_xpos = 25.29557f;
 
     [SerializeField]
     private GameObject Background;
@@ -26,17 +28,18 @@ public class Minimap : MonoBehaviour
     }
 
     // Update is called once per frame
-    void MinimapUpdate(GameObject Player1, GameObject Head1)
+    public void MinimapUpdate(PlayerManager Player1)
     {
-        float backgroundheight = Background.GetComponent<SpriteRenderer>().sprite.rect.height;  
+    
+        //float backgroundheight = Background.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float backgroundwidth = Background.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
+        //float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float minimapwidth = Minimap.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float head1y = Player1.transform.position.y*(minimapheight/backgroundheight);
+        float head1y = Player1.transform.position.y;//*(minimapheight/backgroundheight);
         //float head2y = Player2.transform.position.y*(minimapheight/backgroundheight);
-        Vector2 Head1pos = new Vector2 (Head1.transform.position.x, head1y);
+        Vector2 Head1pos = new Vector2 (head_xpos, head1y);
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);
-        Head1.transform.position = Head1pos;
+        Head.transform.position = Head1pos;
         //Head2.transform.position = Head2pos;
     }
 }
