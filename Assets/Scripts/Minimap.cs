@@ -35,7 +35,7 @@ public class Minimap : MonoBehaviour
         //float backgroundwidth = Background.GetComponent<SpriteRenderer>().sprite.rect.width;
         //float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float minimapwidth = Minimap.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float head1y = Player1.transform.position.y;//*(minimapheight/backgroundheight);
+        float head1y = Player1._body.transform.position.y;//*(minimapheight/backgroundheight);
         //float head2y = Player2.transform.position.y*(minimapheight/backgroundheight);
         Vector2 Head1pos = new Vector2 (head_xpos, head1y);
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);

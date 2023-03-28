@@ -670,7 +670,7 @@ RectTransform:
   m_GameObject: {fileID: 477983324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.230443, y: 1.230443, z: 1.230443}
+  m_LocalScale: {x: 1.2076178, y: 1.2076178, z: 1.2076178}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 292927115}
@@ -678,7 +678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 357, y: 2}
+  m_AnchoredPosition: {x: 359, y: -21}
   m_SizeDelta: {x: 24.3671, y: 307.5999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477983326
@@ -940,6 +940,17 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &866296078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 225554586863125176, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
+  m_PrefabInstance: {fileID: 225554588129015665}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866296070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dea8b8b81784b3169546e82808fe335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &866296079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +976,7 @@ MonoBehaviour:
   - {fileID: 7482667652216324306, guid: 04afc04f5516b484298b2950bd626f60, type: 3}
   droppingSpacing: 6
   finishLine: {fileID: 1223530005}
+  gameManager: {fileID: 866296078}
 --- !u!1 &1223530005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1782,7 @@ PrefabInstance:
     - target: {fileID: 225554586863125176, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
       propertyPath: indicatorPrefab
       value: 
-      objectReference: {fileID: 315908651115096184, guid: 76330c7e2868f4474ab196db9945528a, type: 3}
+      objectReference: {fileID: 1646397724785411734, guid: 2198f53617964488fa5b350b1562bfd7, type: 3}
     - target: {fileID: 225554586863125176, guid: 2b830058eb16c62ae8fb8865a5b51c2b, type: 3}
       propertyPath: positionRandomization
       value: 
