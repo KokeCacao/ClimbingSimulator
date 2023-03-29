@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] private GameObject _rightHumerus;
   [HideInInspector] private GameObject _rightRadius;
   [HideInInspector] private GameObject _rightHand;
-  [HideInInspector] private GameObject _body;
+  [HideInInspector] public GameObject _body;
 
   [HideInInspector] private Rigidbody2D _worldRigidbody;
   [HideInInspector] private Rigidbody2D _leftHumerusRigidbody;

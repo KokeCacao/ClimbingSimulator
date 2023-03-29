@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Minimap : MonoBehaviour
 {
@@ -19,6 +21,9 @@ public class Minimap : MonoBehaviour
     [SerializeField]
     private GameObject MinimapO;
 
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+
 
 
     // Start is called before the first frame update
@@ -35,11 +40,17 @@ public class Minimap : MonoBehaviour
         //float backgroundwidth = Background.GetComponent<SpriteRenderer>().sprite.rect.width;
         //float minimapheight = MinimapO.GetComponent<SpriteRenderer>().sprite.rect.height;  
         //float minimapwidth = Minimap.GetComponent<SpriteRenderer>().sprite.rect.width;
-        float head1y = Player1.transform.position.y;//*(minimapheight/backgroundheight);
+        Vector3 backgroundDimension = Vector3.Scale(Background.GetComponent<SpriteRenderer>().sprite.bounds.size, Background.transform.lossyScale);
+        float backgroundwidth = backgroundDimension.x;
+        float backgroundheight = backgroundDimension.y;
+
+        float head1y = Player1._body.transform.position.y;//*(minimapheight/backgroundheight);
         //float head2y = Player2.transform.position.y*(minimapheight/backgroundheight);
         Vector2 Head1pos = new Vector2 (head_xpos, head1y);
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);
         Head.transform.position = Head1pos;
+
+        scoreText.text = ((head1y/backgroundheight)*100).ToString() + "%";
         //Head2.transform.position = Head2pos;
     }
 }
