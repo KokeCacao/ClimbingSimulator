@@ -29,10 +29,15 @@ public class DroppingObjects : MonoBehaviour
     private Sprite[] bigObjects;
 
     [SerializeField]
-    private float distFromFerret = 20;
-
+    private float distFromFerret = 15f;
+    
     // [SerializeField]
     // private float droppingSpacing;
+
+    [SerializeField]
+    private float timer = 0f;
+
+    private int prevseconds = 0;
 
     [SerializeField]
     private GameObject finishLine;
@@ -44,25 +49,23 @@ public class DroppingObjects : MonoBehaviour
 
     private List<int> dropPositions = new List<int>();
 
-    [SerializeField]
-    float timer = 0.0f;
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        int seconds = (int)(timer % 60);
         //once ferret is at certain height dropping small objects every 1 min/30secs
         //once 1/3 start droping medium objects, once 2/3 drop large objects
         //drop more often as getr higher
         if ((gameManager.players).Count > 0){
+
             ferret = (GameObject)(gameManager.players[0]._body);
+            // float backgroundheight = background.GetComponent<SpriteRenderer>().sprite.rect.height;  
+            // float backgroundwidth = background.GetComponent<SpriteRenderer>().sprite.rect.width;
             Vector3 backgroundDimension = Vector3.Scale(background.GetComponent<SpriteRenderer>().sprite.bounds.size, background.transform.lossyScale);
             float backgroundwidth = backgroundDimension.x;
             float backgroundheight = backgroundDimension.y;
@@ -76,31 +79,44 @@ public class DroppingObjects : MonoBehaviour
                 wonGame = true;
             }
             
-            //if (((int)ferretY != 0) && (!dropPositions.Contains((int)ferretY)) && ((int)ferretY % (int)droppingSpacing == 0) && (!wonGame)){
-            if ((!wonGame)){
+            if (((int)ferretY != 0) && (!wonGame)){
+                timer += Time.deltaTime;
+                int seconds = ((int)timer) % 60;
+
                 dropPositions.Add((int)ferretY);
-                if ((ferretY < backgroundheight*(1f/3f)) && (timer % 45 == 0)){
+                if ((ferretY < backgroundheight*(1f/3f)) && (seconds % 30 == 0) && (prevseconds != seconds)){
                     //do we drop object where ferret is or random??
                     GameObject dropObj = Instantiate(DropObjectS);
-                    //float leftS = min(Mathf)
-                    dropObj.transform.position = new Vector2((Random.Range(-backgroundwidth/2 + 5, backgroundwidth/2 - 5)), 50);
+                    float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
+                    float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
                     dropObj.GetComponent<SpriteRenderer>().sprite = smallObjects[Random.Range(0, numSmallObj)];
                 }
-                if ((backgroundheight*(1f/3f) < ferretY) && (ferretY < backgroundheight*(2f/3f)) && (timer % 30 == 0)){
+                if ((backgroundheight*(1f/3f) < ferretY) && (ferretY < backgroundheight*(2f/3f))  && (seconds % 20 == 0) && (prevseconds != seconds)){
                     //do we drop object where ferret is or random??
                     GameObject dropObj = Instantiate(DropObjectM);
-                    dropObj.transform.position = new Vector2((Random.Range(-backgroundwidth/2 + 5, backgroundwidth/2 - 5)), 50);
+                    float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
+                    float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
                     dropObj.GetComponent<SpriteRenderer>().sprite = mediumObjects[Random.Range(0, numMediumObj)];
                 }
-                if ((backgroundheight*(2f/3f) < ferretY) && (timer % 15 == 0)){
+                if ((backgroundheight*(2f/3f) < ferretY )&& (seconds % 10 == 0) && (prevseconds != seconds)){
                     //do we drop object where ferret is or random??
                     GameObject dropObj = Instantiate(DropObjectL);
-                    dropObj.transform.position = new Vector2((Random.Range(-backgroundwidth/2 + 5, backgroundwidth/2 - 5)), 50);
+                    float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
+                    float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
                     dropObj.GetComponent<SpriteRenderer>().sprite = bigObjects[Random.Range(0, numBigObj)];
                 }
 
+                prevseconds = seconds;
+
             }
+
         }
+
+        
+        
         
     }
 }
