@@ -18,6 +18,15 @@ public class EndCondition : MonoBehaviour
     [SerializeField]
     private GameObject BlackMask;
 
+    [SerializeField]
+    private GameObject ferret;
+
+    [SerializeField]
+    private GameObject finishLine;
+
+    [SerializeField]
+    public GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +48,14 @@ public class EndCondition : MonoBehaviour
     }
 
     void SewerEndCondition(){
-        if (!lidClosed){
-            CloseLid();
-        }
+        if ((gameManager.players).Count > 0){
+            ferret = (GameObject)(gameManager.players[0]._body);
+            if (ferret.transform.position.y >= finishLine.transform.position.y){
+                if (!lidClosed){
+                    CloseLid();
+                }
+            } 
+        }  
     }
 
     // Update is called once per frame
