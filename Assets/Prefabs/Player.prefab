@@ -515,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4624916881464044205}
   - component: {fileID: 538579758192633217}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: LeftHandSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 3381137123099104585}
   - component: {fileID: 2755234468647888918}
   - component: {fileID: 6626531074550516530}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6231176064891445145}
   - component: {fileID: 5480783073087618876}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: RightHandSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2110,7 +2110,7 @@ GameObject:
   - component: {fileID: 7226679952963881583}
   - component: {fileID: 4192535270363929241}
   - component: {fileID: 8425444980701307356}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

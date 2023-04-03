@@ -381,6 +381,17 @@ public class PlayerManager : MonoBehaviour
 
   private void FixedUpdate()
   {
+    // randomly activate or deactivate _leftHand, _rightHand CircleCollider2D
+    if (Random.Range(0, 2) < 1)
+    {
+      _leftHand.GetComponent<CircleCollider2D>().enabled = !_leftHand.GetComponent<CircleCollider2D>().enabled;
+    }
+    if (Random.Range(0, 2) < 1)
+    {
+      _rightHand.GetComponent<CircleCollider2D>().enabled = !_rightHand.GetComponent<CircleCollider2D>().enabled;
+    }
+    
+
     leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
     rightStick = (Vector2)_rightBody2HumerusPoint + rightControlerInput * ARM_LENGTH;
 
