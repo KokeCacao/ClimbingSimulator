@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public Vector2 rightStick;
   [HideInInspector] public Vector2 leftControlerInput;
   [HideInInspector] public Vector2 rightControlerInput;
-  
+
   // These are initialized directly
   [HideInInspector] private Controls controls;
   [HideInInspector] public int playerIndex;
@@ -98,7 +98,12 @@ public class PlayerManager : MonoBehaviour
   public void OnControlsChanged(PlayerInput playerInput)
   {
     playerInput.camera = _camera;
-    playerInput.camera.cullingMask = (1 << LayerMask.NameToLayer("Default")) | (1 << LayerMask.NameToLayer("UI")) | (1 << LayerMask.NameToLayer("Player"));
+    playerInput.camera.cullingMask = (1 << LayerMask.NameToLayer("Default"))
+    | (1 << LayerMask.NameToLayer("UI"))
+    | (1 << LayerMask.NameToLayer("Floater"))
+    | (1 << LayerMask.NameToLayer("Sinker"))
+    | (1 << LayerMask.NameToLayer("PlayerArm"))
+    | (1 << LayerMask.NameToLayer("Player"));
     if (controls == null)
     {
       controls = new Controls();
@@ -137,7 +142,8 @@ public class PlayerManager : MonoBehaviour
     leftGrab = context.ReadValueAsButton();
     OnLeftGrabEvent();
   }
-  public void OnLeftGrabEvent() {
+  public void OnLeftGrabEvent()
+  {
     // update _leftAim with red color
     _leftAim.GetComponent<SpriteRenderer>().color = leftGrab ? Color.red : Color.gray;
     _leftHand.GetComponentInChildren<SpriteRenderer>().sprite = leftGrab ? _handGrabSpriteLeft[playerIndex % _handGrabSpriteLeft.Length] : _handReleaseSpriteLeft[playerIndex % _handReleaseSpriteLeft.Length];
@@ -175,7 +181,8 @@ public class PlayerManager : MonoBehaviour
     rightGrab = context.ReadValueAsButton();
     OnRightGrabEvent();
   }
-  public void OnRightGrabEvent() {
+  public void OnRightGrabEvent()
+  {
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSpriteRight[playerIndex % _handGrabSpriteRight.Length] : _handReleaseSpriteRight[playerIndex % _handReleaseSpriteRight.Length];
@@ -361,11 +368,11 @@ public class PlayerManager : MonoBehaviour
     // aim indicator
     // if (!leftGrab)
     // {
-      _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
+    _leftAim.transform.position = new Vector3(leftStick.x, leftStick.y, 0);
     // }
     // if (!rightGrab)
     // {
-      _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
+    _rightAim.transform.position = new Vector3(rightStick.x, rightStick.y, 0);
     // }
 
     // camera follow

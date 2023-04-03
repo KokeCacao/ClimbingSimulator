@@ -969,6 +969,7 @@ GameObject:
   - component: {fileID: 8105985442180151909}
   - component: {fileID: 3381137123099104585}
   - component: {fileID: 2755234468647888918}
+  - component: {fileID: 6626531074550516530}
   m_Layer: 3
   m_Name: LeftHand
   m_TagString: Untagged
@@ -1037,6 +1038,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -10
     m_UpperAngle: 10
+--- !u!58 &6626531074550516530
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899380450218694270}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &4373852447532033131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6231176064891445145}
   - component: {fileID: 5480783073087618876}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightHandSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2109,8 @@ GameObject:
   - component: {fileID: 2602631840135583220}
   - component: {fileID: 7226679952963881583}
   - component: {fileID: 4192535270363929241}
-  m_Layer: 0
+  - component: {fileID: 8425444980701307356}
+  m_Layer: 3
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2160,6 +2178,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -10
     m_UpperAngle: 10
+--- !u!58 &8425444980701307356
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8355274959255521225}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &8700316274348971165
 GameObject:
   m_ObjectHideFlags: 0
