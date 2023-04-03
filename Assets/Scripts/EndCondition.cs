@@ -50,7 +50,7 @@ public class EndCondition : MonoBehaviour
     void SewerEndCondition(){
         if ((gameManager.players).Count > 0){
             ferret = (GameObject)(gameManager.players[0]._body);
-            if (ferret.transform.position.y >= finishLine.transform.position.y){
+            if (ferret.transform.position.y >= finishLine.transform.position.y || Input.GetKey("down")){
                 if (!lidClosed){
                     CloseLid();
                 }
@@ -61,10 +61,8 @@ public class EndCondition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("down"))
-        {
-             SewerEndCondition();
-        }
+
+        SewerEndCondition();
        
     }
 
