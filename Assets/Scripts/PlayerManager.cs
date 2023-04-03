@@ -324,6 +324,8 @@ public class PlayerManager : MonoBehaviour
       rigidBody.gravityScale = IK_GRAVITY;
       rigidBody.mass = IK_MASS_BODY;
       rigidBody.angularDrag = IK_ANGULAR_DRAG_BODY;
+
+      _gameManager.waterManager.AddFloater(rigidBody);
     }
 
     // add itself to GameManager

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
   [SerializeField] public PositionRandomization positionRandomization;
   [SerializeField] public Minimap minimap;
+  [SerializeField] public WaterManager waterManager;
 
   public List<PlayerManager> players;
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8831356864585588167}
   - component: {fileID: 8684418795489288663}
   - component: {fileID: 542047736423274884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LDropObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

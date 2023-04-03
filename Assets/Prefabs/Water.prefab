@@ -207,5 +207,11 @@ MonoBehaviour:
   dropletPrefab: {fileID: 4096700800021605003, guid: adad9c3096a818c2ebdbec95b8ff5a0b, type: 3}
   waterHeight: 10
   waterWidth: 20
-  waterAmount: 200
+  waterAmount: 1024
   waterPosition: {x: 0, y: 0, z: 0}
+  buoyancyDistance: 0.5
+  buoyancyForce: 200
+  waterDrag: 0.5
+  floater: []
+  sinker: []
+  waterLevel: 0
