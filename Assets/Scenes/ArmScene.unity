@@ -981,11 +981,18 @@ MonoBehaviour:
   DropObjectM: {fileID: 8338151387688700413, guid: ff0aedbe48d2746e0a0d1f7f1299d164, type: 3}
   DropObjectL: {fileID: 9088388650413364580, guid: c41707668b11440b5a90641a2272fa25, type: 3}
   smallObjects:
-  - {fileID: 7482667652216324306, guid: 04afc04f5516b484298b2950bd626f60, type: 3}
+  - {fileID: 21300000, guid: f9975a9383db1bc4bab800f4e00e1036, type: 3}
+  - {fileID: 21300000, guid: 970a2abc062033d48bc62a28df949ba8, type: 3}
+  - {fileID: 21300000, guid: 4c924c20d05d65e41a0ee7c4f919b3c5, type: 3}
+  - {fileID: 21300000, guid: 76d21d67dc85d5345b1c3f31f44145dc, type: 3}
   mediumObjects:
-  - {fileID: 7482667652216324306, guid: 04afc04f5516b484298b2950bd626f60, type: 3}
+  - {fileID: 21300000, guid: 2c810b1878da8aa468f9d80ea3b196a9, type: 3}
+  - {fileID: 21300000, guid: db4759a5319f0ac4c997dcb0a09e2b47, type: 3}
+  - {fileID: 21300000, guid: 044cc278c366ee844a4542098b42f4f5, type: 3}
   bigObjects:
-  - {fileID: 7482667652216324306, guid: 04afc04f5516b484298b2950bd626f60, type: 3}
+  - {fileID: 21300000, guid: f9975a9383db1bc4bab800f4e00e1036, type: 3}
+  - {fileID: 21300000, guid: 044cc278c366ee844a4542098b42f4f5, type: 3}
+  - {fileID: 21300000, guid: db4759a5319f0ac4c997dcb0a09e2b47, type: 3}
   distFromFerret: 15
   timer: 0
   finishLine: {fileID: 1223530005}
