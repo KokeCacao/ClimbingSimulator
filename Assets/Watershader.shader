@@ -47,7 +47,7 @@ Shader "Custom/TransparentUnlit"
       fixed4 frag (v2f i) : SV_Target
       {
         fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-        col.a = col.a > 0.1;
+        col.a = (col.a > 0.1f) * 0.8f;
         col.r = _Color.r;
         col.g = _Color.g;
         col.b = _Color.b;

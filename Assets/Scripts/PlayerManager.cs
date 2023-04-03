@@ -381,15 +381,11 @@ public class PlayerManager : MonoBehaviour
 
   private void FixedUpdate()
   {
-    // randomly activate or deactivate _leftHand, _rightHand CircleCollider2D
-    if (Random.Range(0, 2) < 1)
-    {
-      _leftHand.GetComponent<CircleCollider2D>().enabled = !_leftHand.GetComponent<CircleCollider2D>().enabled;
-    }
-    if (Random.Range(0, 2) < 1)
-    {
-      _rightHand.GetComponent<CircleCollider2D>().enabled = !_rightHand.GetComponent<CircleCollider2D>().enabled;
-    }
+    // for water: if trying to float up, no collision, otherwise there is
+    float leftHandCollisionProbability = Vector2.Dot(_leftHandRigidbody.velocity, Vector2.right);
+    float rightHandCollisionProbability = Vector2.Dot(_rightHandRigidbody.velocity, Vector2.right);
+    _leftHand.GetComponent<CircleCollider2D>().enabled = Random.Range(0f, 1f) < leftHandCollisionProbability;
+    _rightHand.GetComponent<CircleCollider2D>().enabled = Random.Range(0f, 1f) < rightHandCollisionProbability;
     
 
     leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
