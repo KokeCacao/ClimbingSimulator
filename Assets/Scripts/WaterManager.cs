@@ -48,7 +48,7 @@ public class WaterManager : MonoBehaviour
     waterHolder = new GameObject("WaterHolder");
     waterHolder.transform.parent = transform;
 
-
+    
     for (int i = 0; i < waterAmount; i++)
     {
       GameObject water = Instantiate(dropletPrefab);
@@ -68,12 +68,16 @@ public class WaterManager : MonoBehaviour
   {
     SortDropletBasedOnYPosition();
     Vector3 waterHolderPosition = new Vector3(0, 0, 0);
-    for (int i = 0; i < topWaterCount; i++)
-    {
-      GameObject water = waterList[i];
-      waterHolderPosition += water.transform.position;
+    print("list length "  + waterList.Count + "water count " + topWaterCount);
+    if (topWaterCount <= waterAmount){
+      for (int i = 0; i < topWaterCount; i++)
+      {
+        GameObject water = waterList[i];
+        waterHolderPosition += water.transform.position;
+      }
+      waterHolderPosition /= topWaterCount;
     }
-    waterHolderPosition /= topWaterCount;
+    
     waterLevel = waterHolderPosition.y;
   }
 

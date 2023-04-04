@@ -390,6 +390,7 @@ public class PlayerManager : MonoBehaviour
 
     // camera follow
     _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
+    _camera.orthographicSize = 7.0f;
   }
 
   private void FixedUpdate()

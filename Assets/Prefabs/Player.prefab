@@ -54,13 +54,13 @@ MonoBehaviour:
   _virtualRightAim: {x: 0, y: 0}
   _camera: {fileID: 5266713735304571029}
   _handReleaseSpriteLeft:
-  - {fileID: 21300000, guid: 916266b14971ff041aea405dc3dda20d, type: 3}
+  - {fileID: 21300000, guid: cc9978061fbf34ca4a9baa46dd1aa987, type: 3}
   - {fileID: 21300000, guid: 16d021d66f79c1b43be3aa5a8f77c47d, type: 3}
   _handGrabSpriteLeft:
   - {fileID: 21300000, guid: fbf016aa7551d8f48a0007e9f77c08e8, type: 3}
   - {fileID: 21300000, guid: 7295effa1238c9944a613261e284fcf1, type: 3}
   _handReleaseSpriteRight:
-  - {fileID: 21300000, guid: 5711bf0955d38b44394837a76c906730, type: 3}
+  - {fileID: 21300000, guid: e95d35998178e4c9eac627d59ed3df23, type: 3}
   - {fileID: 21300000, guid: 48f969b9418f97c4a88bbd52a9a2e5fa, type: 3}
   _handGrabSpriteRight:
   - {fileID: 21300000, guid: 6ac27ad0b79446b418e774ffb3c25530, type: 3}
