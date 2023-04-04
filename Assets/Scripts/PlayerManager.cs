@@ -365,6 +365,19 @@ public class PlayerManager : MonoBehaviour
     _virtualLeftAim = leftStick;
     _virtualRightAim = rightStick;
 
+    float r2ov2 = Mathf.Sqrt(2.0f)/2.0f;
+
+    if (leftGrab && leftControlerInput.y < -r2ov2)
+    {
+      leftStick = (Vector2)_leftBody2HumerusPoint + (new Vector2(leftControlerInput.x > 0 ? r2ov2 : -r2ov2, -r2ov2)) * ARM_LENGTH;
+      _virtualLeftAim = leftStick;
+    }
+    if (rightGrab && rightControlerInput.y < -r2ov2)
+    {
+      rightStick = (Vector2)_rightBody2HumerusPoint + (new Vector2(rightControlerInput.x > 0 ? r2ov2 : -r2ov2, -r2ov2)) * ARM_LENGTH;
+      _virtualRightAim = rightStick;
+    }
+
     // aim indicator
     // if (!leftGrab)
     // {
@@ -386,7 +399,7 @@ public class PlayerManager : MonoBehaviour
     float rightHandCollisionProbability = Vector2.Dot(_rightHandRigidbody.velocity, Vector2.right);
     _leftHand.GetComponent<CircleCollider2D>().enabled = Random.Range(0f, 1f) < leftHandCollisionProbability;
     _rightHand.GetComponent<CircleCollider2D>().enabled = Random.Range(0f, 1f) < rightHandCollisionProbability;
-    
+
 
     leftStick = (Vector2)_leftBody2HumerusPoint + leftControlerInput * ARM_LENGTH;
     rightStick = (Vector2)_rightBody2HumerusPoint + rightControlerInput * ARM_LENGTH;
