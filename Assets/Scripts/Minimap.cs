@@ -24,6 +24,11 @@ public class Minimap : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
+    [SerializeField]
+    private GameObject canvasMinimap;
+
+    private float lowerOffset = 100f;
+
 
 
     // Start is called before the first frame update
@@ -44,13 +49,18 @@ public class Minimap : MonoBehaviour
         float backgroundwidth = backgroundDimension.x;
         float backgroundheight = backgroundDimension.y;
 
+        float canvasMinimapH = canvasMinimap.transform.lossyScale.y;
+
         float head1y = Player1._body.transform.position.y;//*(minimapheight/backgroundheight);
         //float head2y = Player2.transform.position.y*(minimapheight/backgroundheight);
         Vector2 Head1pos = new Vector2 (head_xpos, head1y);
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);
         Head.transform.position = Head1pos;
 
-        scoreText.text = ((head1y/backgroundheight)*100).ToString() + "%";
+        scoreText.text = ((int)((head1y/backgroundheight)*100)).ToString() + "%";
+        float textposy = (head1y/backgroundheight)*canvasMinimapH + lowerOffset;
+        Vector2 textpos = new Vector2 (scoreText.transform.position.x, textposy);
+        scoreText.transform.position = textpos;
         //Head2.transform.position = Head2pos;
     }
 }
