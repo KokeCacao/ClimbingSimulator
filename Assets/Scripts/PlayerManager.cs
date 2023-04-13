@@ -136,6 +136,11 @@ public class PlayerManager : MonoBehaviour
   }
 
   // Now start Event Handlers
+  public void ReleaseLeftGrab()
+  {
+    leftGrab = false;
+    OnLeftGrabEvent();
+  }
   public void OnLeftGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
@@ -174,7 +179,11 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-
+  public void ReleaseRightGrab()
+  {
+    rightGrab = false;
+    OnRightGrabEvent();
+  }
   public void OnRightGrabEvent(InputAction.CallbackContext context, int playerIndex)
   {
     if (!isValidInput(context)) return;
@@ -485,6 +494,20 @@ public class PlayerManager : MonoBehaviour
     if (controls != null)
     {
       controls.Disable();
+    }
+  }
+
+  public void Hit() {
+    if (leftGrab && rightGrab) {
+      if (Random.Range(0, 2) == 0) {
+        ReleaseLeftGrab();
+        Debug.Log("left release");
+        _leftHandRigidbody.AddForce(Vector2.down * 100);
+      } else {
+        ReleaseRightGrab();
+        Debug.Log("right release");
+        _rightHandRigidbody.AddForce(Vector2.down * 100);
+      }
     }
   }
 }

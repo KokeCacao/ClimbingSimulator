@@ -68,7 +68,7 @@ public class WaterManager : MonoBehaviour
   {
     SortDropletBasedOnYPosition();
     Vector3 waterHolderPosition = new Vector3(0, 0, 0);
-    print("list length "  + waterList.Count + "water count " + topWaterCount);
+    // print("list length "  + waterList.Count + "water count " + topWaterCount);
     if (topWaterCount <= waterAmount){
       for (int i = 0; i < topWaterCount; i++)
       {
@@ -114,15 +114,15 @@ public class WaterManager : MonoBehaviour
   {
     UpdateWaterLevel();
 
-    Debug.Log("Water Level: " + waterLevel);
+    // Debug.Log("Water Level: " + waterLevel);
 
     // floater logics
     for (int i = 0; i < floater.Count; i++)
     {
       Rigidbody2D rb = floater[i];
       float distance = rb.transform.position.y - waterLevel;
-      Debug.Log("Floater: " + rb.name + " is " + distance + " units away from water level");
-      Debug.Log("Floater: " + rb.name + " has position: " + rb.transform.position.y);
+      // Debug.Log("Floater: " + rb.name + " is " + distance + " units away from water level");
+      // Debug.Log("Floater: " + rb.name + " has position: " + rb.transform.position.y);
       if (distance > 0)
       {
         rb.drag = floaterOriginalDrag[i];
@@ -131,7 +131,7 @@ public class WaterManager : MonoBehaviour
       {
         rb.drag = waterDrag;
         rb.AddForce(new Vector2(0, buoyancyForce * Mathf.Clamp(-distance, 0, buoyancyDistance)));
-        Debug.Log("Floater: " + rb.name + " is floating");
+        // Debug.Log("Floater: " + rb.name + " is floating");
       }
     }
 
