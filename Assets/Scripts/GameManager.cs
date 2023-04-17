@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
   [SerializeField] public GameObject world;
   [SerializeField] public GameObject indicatorPrefab;
+  [SerializeField] public Camera startingCamera;
 
   [SerializeField] public PositionRandomization positionRandomization;
   [SerializeField] public Minimap minimap;

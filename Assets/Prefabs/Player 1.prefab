@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7898088808239916500}
+  - {fileID: 5438885068054715378}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,7 +52,7 @@ MonoBehaviour:
   _rightAim: {fileID: 8700316274348971165}
   _virtualLeftAim: {x: 0, y: 0}
   _virtualRightAim: {x: 0, y: 0}
-  _camera: {fileID: 0}
+  _camera: {fileID: 8250171839353363092}
   _handReleaseSpriteLeft:
   - {fileID: 21300000, guid: cc9978061fbf34ca4a9baa46dd1aa987, type: 3}
   - {fileID: 21300000, guid: 16d021d66f79c1b43be3aa5a8f77c47d, type: 3}
@@ -186,7 +187,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.5387411, y: 0.000000023549122}
+  m_ConnectedAnchor: {x: 0.5387411, y: 0.00000008777207}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -837,7 +838,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.4897647, y: 0.000000021408294}
+  m_ConnectedAnchor: {x: 0.4897647, y: 0.0000000797928}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2321,3 +2322,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &6837678294526241692
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1059796374164988646}
+    m_Modifications:
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5610517726424301225, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+      propertyPath: m_Name
+      value: Camera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+--- !u!4 &5438885068054715378 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1557855184408899694, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+  m_PrefabInstance: {fileID: 6837678294526241692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &8250171839353363092 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3213933776991432968, guid: aa2491782173af13382dfa8eb91bdd5f, type: 3}
+  m_PrefabInstance: {fileID: 6837678294526241692}
+  m_PrefabAsset: {fileID: 0}
