@@ -97,11 +97,11 @@ public class PlayerManager : MonoBehaviour
 
   public void OnControlsChanged(PlayerInput playerInput)
   {
-    if (_gameManager.startingCamera != null)
-    {
-      _camera = _gameManager.startingCamera;
-    }
-    playerInput.camera = _camera;
+    // if (_gameManager.startingCamera != null)
+    // {
+    //   _camera = _gameManager.startingCamera;
+    // }
+    // playerInput.camera = _camera;
     playerInput.camera.cullingMask = (1 << LayerMask.NameToLayer("Default"))
     | (1 << LayerMask.NameToLayer("UI"))
     | (1 << LayerMask.NameToLayer("Floater"))
