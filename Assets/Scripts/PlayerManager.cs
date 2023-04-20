@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
   [SerializeField] public GameObject[] _playerHeadMinimap;
 
   // These are automatically based on above
+  [HideInInspector] private MainMenu _mainMenu;
   [HideInInspector] private GameManager _gameManager;
   [HideInInspector] private GameObject _leftHumerus;
   [HideInInspector] private GameObject _leftRadius;
@@ -127,6 +128,8 @@ public class PlayerManager : MonoBehaviour
     controls.ActionMap.LeftArm.canceled += ctx => OnLeftMoveEvent(ctx, playerInput.playerIndex);
     controls.ActionMap.RightArm.performed += ctx => OnRightMoveEvent(ctx, playerInput.playerIndex);
     controls.ActionMap.RightArm.canceled += ctx => OnRightMoveEvent(ctx, playerInput.playerIndex);
+    controls.ActionMap.Start.performed += ctx => _mainMenu.DisableMenu();
+    controls.ActionMap.Back.performed += ctx => _mainMenu.EnableMenu();
     controls.Enable();
   }
 
@@ -266,6 +269,7 @@ public class PlayerManager : MonoBehaviour
     Debug.Assert(_virtualRightAim != null);
 
     // get children game objects of _player
+    _mainMenu = GameObject.Find("MainMenu").GetComponent<MainMenu>();
     _body = _player.transform.Find("Body").gameObject;
     _leftHumerus = _body.transform.Find("LeftHumerus").gameObject;
     _leftRadius = _body.transform.Find("LeftRadius").gameObject;
@@ -276,6 +280,7 @@ public class PlayerManager : MonoBehaviour
 
     //_playerHead = _player.transform.Find("Player Head").gameObject;
 
+    Debug.Assert(_mainMenu != null);
     Debug.Assert(_body != null);
     Debug.Assert(_leftHumerus != null);
     Debug.Assert(_leftRadius != null);

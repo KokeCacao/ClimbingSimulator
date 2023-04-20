@@ -24,8 +24,22 @@ public class MainMenu : MonoBehaviour
 
   public void DisableMenu()
   {
+    // does nothing when player in game
+    // go to game when player in menu
     menu.SetActive(false);
     minimap.SetActive(true);
+  }
+
+  public void EnableMenu()
+  {
+    // go to menu when player in game
+    // quit game when player in menu
+    if (menu.activeSelf) {
+      QuitGame();
+      return;
+    }
+    menu.SetActive(true);
+    minimap.SetActive(false);
   }
 
   public void QuitGame()

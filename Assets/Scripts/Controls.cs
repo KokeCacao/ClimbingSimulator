@@ -62,6 +62,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""8396c9ec-6b49-4029-8b83-b6b725bec611"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a3bf5a4-7055-4f09-a86e-005cfab2532b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -262,6 +280,50 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""RightArm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56445282-369c-4033-b975-ca08abd0c8d3"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardScheme"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fdcac96-ef80-464e-b8cc-7cfab75b064c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Control Scheme"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8cc3779-c7d7-4889-ac63-e4e7dfcecae4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardScheme"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b066e1e2-acc1-4ca5-b395-f4cda83b14cb"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Control Scheme"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -297,6 +359,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_ActionMap_RightGrab = m_ActionMap.FindAction("RightGrab", throwIfNotFound: true);
         m_ActionMap_LeftArm = m_ActionMap.FindAction("LeftArm", throwIfNotFound: true);
         m_ActionMap_RightArm = m_ActionMap.FindAction("RightArm", throwIfNotFound: true);
+        m_ActionMap_Start = m_ActionMap.FindAction("Start", throwIfNotFound: true);
+        m_ActionMap_Back = m_ActionMap.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -360,6 +424,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_ActionMap_RightGrab;
     private readonly InputAction m_ActionMap_LeftArm;
     private readonly InputAction m_ActionMap_RightArm;
+    private readonly InputAction m_ActionMap_Start;
+    private readonly InputAction m_ActionMap_Back;
     public struct ActionMapActions
     {
         private @Controls m_Wrapper;
@@ -368,6 +434,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @RightGrab => m_Wrapper.m_ActionMap_RightGrab;
         public InputAction @LeftArm => m_Wrapper.m_ActionMap_LeftArm;
         public InputAction @RightArm => m_Wrapper.m_ActionMap_RightArm;
+        public InputAction @Start => m_Wrapper.m_ActionMap_Start;
+        public InputAction @Back => m_Wrapper.m_ActionMap_Back;
         public InputActionMap Get() { return m_Wrapper.m_ActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -389,6 +457,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @RightArm.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRightArm;
                 @RightArm.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRightArm;
                 @RightArm.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRightArm;
+                @Start.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnStart;
+                @Back.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_ActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -405,6 +479,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @RightArm.started += instance.OnRightArm;
                 @RightArm.performed += instance.OnRightArm;
                 @RightArm.canceled += instance.OnRightArm;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -433,5 +513,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnRightGrab(InputAction.CallbackContext context);
         void OnLeftArm(InputAction.CallbackContext context);
         void OnRightArm(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }
