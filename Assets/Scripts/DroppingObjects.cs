@@ -10,23 +10,23 @@ public class DroppingObjects : MonoBehaviour
     [SerializeField]
     private GameObject ferret;
 
-    [SerializeField]
-    private GameObject DropObjectS;
+    // [SerializeField]
+    // private GameObject DropObjectS;
 
-    [SerializeField]
-    private GameObject DropObjectM;
+    // [SerializeField]
+    // private GameObject DropObjectM;
 
-    [SerializeField]
-    private GameObject DropObjectL;
-
-    [SerializeField] 
-    private Sprite[] smallObjects;
+    // [SerializeField]
+    // private GameObject DropObjectL;
 
     [SerializeField] 
-    private Sprite[] mediumObjects;
+    private GameObject[] smallObjects;
 
     [SerializeField] 
-    private Sprite[] bigObjects;
+    private GameObject[] mediumObjects;
+
+    [SerializeField] 
+    private GameObject[] bigObjects;
 
     [SerializeField]
     private float distFromFerret = 15f;
@@ -85,31 +85,35 @@ public class DroppingObjects : MonoBehaviour
 
                 dropPositions.Add((int)ferretY);
                 if ((ferretY < backgroundheight*(1f/3f)) && (seconds % 30 == 0) && (prevseconds != seconds)){
-                    //do we drop object where ferret is or random??
-                    GameObject dropObj = Instantiate(DropObjectS);
-                    gameManager.waterManager.AddFloater(dropObj.GetComponent<Rigidbody2D>());
+                    //choose object to drop from small objects list to instantiate
+                    int SObjectIndex = Random.Range(0,numSmallObj);
+                    GameObject SObject = smallObjects[SObjectIndex];
+                    GameObject dropObj = Instantiate(SObject);
+                    // gameManager.waterManager.AddFloater(dropObj.GetComponent<Rigidbody2D>());
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
-                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
-                    dropObj.GetComponent<SpriteRenderer>().sprite = smallObjects[Random.Range(0, numSmallObj)];
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    //  dropObj.GetComponent<SpriteRenderer>().sprite = smallObjects[Random.Range(0, numSmallObj)];
                 }
                 if ((backgroundheight*(1f/3f) < ferretY) && (ferretY < backgroundheight*(2f/3f))  && (seconds % 20 == 0) && (prevseconds != seconds)){
-                    //do we drop object where ferret is or random??
-                    GameObject dropObj = Instantiate(DropObjectM);
-                    gameManager.waterManager.AddSinker(dropObj.GetComponent<Rigidbody2D>());
+                    //choose object to drop from medium objects list to instantiate
+                    int MObjectIndex = Random.Range(0,numMediumObj);
+                    GameObject dropObj = Instantiate(mediumObjects[MObjectIndex]);
+                    // gameManager.waterManager.AddSinker(dropObj.GetComponent<Rigidbody2D>());
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
-                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
-                    dropObj.GetComponent<SpriteRenderer>().sprite = mediumObjects[Random.Range(0, numMediumObj)];
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    // dropObj.GetComponent<SpriteRenderer>().sprite = mediumObjects[Random.Range(0, numMediumObj)];
                 }
                 if ((backgroundheight*(2f/3f) < ferretY )&& (seconds % 10 == 0) && (prevseconds != seconds)){
-                    //do we drop object where ferret is or random??
-                    GameObject dropObj = Instantiate(DropObjectL);
-                    gameManager.waterManager.AddSinker(dropObj.GetComponent<Rigidbody2D>());
+                    //choose object to drop from small objects list to instantiate
+                    int LObjectIndex = Random.Range(0,numBigObj);
+                    GameObject dropObj = Instantiate(bigObjects[LObjectIndex]);
+                    // gameManager.waterManager.AddSinker(dropObj.GetComponent<Rigidbody2D>());
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
-                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), 50);
-                    dropObj.GetComponent<SpriteRenderer>().sprite = bigObjects[Random.Range(0, numBigObj)];
+                    dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    //dropObj.GetComponent<SpriteRenderer>().sprite = bigObjects[Random.Range(0, numBigObj)];
                 }
 
                 prevseconds = seconds;

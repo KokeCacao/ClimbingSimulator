@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3964447537200687469}
   - component: {fileID: 8645318357408667888}
   - component: {fileID: 3239811837122790593}
+  - component: {fileID: -3925131786124432746}
   m_Layer: 0
   m_Name: small_toothbrush
   m_TagString: Untagged
@@ -160,3 +161,24 @@ PolygonCollider2D:
       - {x: 0.22999999, y: -2.915}
       - {x: 0.34, y: -2.845}
       - {x: 0.37, y: -2.7549999}
+--- !u!50 &-3925131786124432746
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096980336515424912}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

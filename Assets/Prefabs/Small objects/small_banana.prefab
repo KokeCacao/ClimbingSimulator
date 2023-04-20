@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6912727924910454112}
   - component: {fileID: 6715380092686703293}
   - component: {fileID: 8367659292484403420}
+  - component: {fileID: -6495028530904463652}
   m_Layer: 0
   m_Name: small_banana
   m_TagString: Untagged
@@ -189,3 +190,24 @@ PolygonCollider2D:
       - {x: 1.225, y: -2.03}
       - {x: 1.395, y: -1.9699999}
       - {x: 1.475, y: -1.9399999}
+--- !u!50 &-6495028530904463652
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079627099204192695}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

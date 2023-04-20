@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6274757939352931420}
   - component: {fileID: 4057825224789635050}
   - component: {fileID: 1732863134069813735}
+  - component: {fileID: -6357184914390930900}
   m_Layer: 0
   m_Name: large_rake
   m_TagString: Untagged
@@ -411,3 +412,24 @@ PolygonCollider2D:
       - {x: 0.66499996, y: -2.57}
       - {x: 0.645, y: -2.57}
       - {x: 0.60499996, y: -2.59}
+--- !u!50 &-6357184914390930900
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626251683446227624}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

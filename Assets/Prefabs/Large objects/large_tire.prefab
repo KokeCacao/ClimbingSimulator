@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1679687719103244033}
   - component: {fileID: 6381242576948240410}
   - component: {fileID: 7791848368086549092}
+  - component: {fileID: -8417530967715438035}
   m_Layer: 0
   m_Name: large_tire
   m_TagString: Untagged
@@ -347,3 +348,24 @@ PolygonCollider2D:
       - {x: 0.074999996, y: 0.57}
       - {x: -0.055, y: 0.57}
       - {x: -0.065, y: 0.58}
+--- !u!50 &-8417530967715438035
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450530367646692869}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

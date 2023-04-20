@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3546317008133120844}
   - component: {fileID: 687193658057272956}
   - component: {fileID: -8802335734240873080}
+  - component: {fileID: -6012300390869762778}
   m_Layer: 0
   m_Name: medium_wateringCan (1)
   m_TagString: Untagged
@@ -169,3 +170,24 @@ PolygonCollider2D:
       - {x: 0.91499996, y: 0.5}
       - {x: 0.935, y: 0.39999998}
       - {x: 0.885, y: 0.41}
+--- !u!50 &-6012300390869762778
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599963194599843366}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

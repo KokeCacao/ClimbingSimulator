@@ -821,7 +821,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 3.9001465, y: 56.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1165,22 +1165,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1440105777}
   ferret: {fileID: 183142157990674369, guid: 81df223851dc0dca38cc5412af35480a, type: 3}
-  DropObjectS: {fileID: 23945604093822450, guid: c6d359a3055914d6bb1c6acdaef79903, type: 3}
-  DropObjectM: {fileID: 8338151387688700413, guid: ff0aedbe48d2746e0a0d1f7f1299d164, type: 3}
-  DropObjectL: {fileID: 9088388650413364580, guid: c41707668b11440b5a90641a2272fa25, type: 3}
   smallObjects:
-  - {fileID: 21300000, guid: f9975a9383db1bc4bab800f4e00e1036, type: 3}
-  - {fileID: 21300000, guid: 970a2abc062033d48bc62a28df949ba8, type: 3}
-  - {fileID: 21300000, guid: 4c924c20d05d65e41a0ee7c4f919b3c5, type: 3}
-  - {fileID: 21300000, guid: 76d21d67dc85d5345b1c3f31f44145dc, type: 3}
+  - {fileID: 8079627099204192695, guid: dd194261ade53499699984b9b2c129df, type: 3}
+  - {fileID: 6229016932686152850, guid: cf170dd565af14f16afa0c3ba7764e02, type: 3}
+  - {fileID: 1792642232027496704, guid: 5de75583801ca48248ae1cdc4ae27efc, type: 3}
+  - {fileID: 5096980336515424912, guid: 6fe0e5b8f07474df7b5e572578810f03, type: 3}
   mediumObjects:
-  - {fileID: 21300000, guid: 2c810b1878da8aa468f9d80ea3b196a9, type: 3}
-  - {fileID: 21300000, guid: db4759a5319f0ac4c997dcb0a09e2b47, type: 3}
-  - {fileID: 21300000, guid: 044cc278c366ee844a4542098b42f4f5, type: 3}
+  - {fileID: 4800123089941768369, guid: 05220d988ded2479aa1230d4a296205d, type: 3}
+  - {fileID: 6970673614568909233, guid: 63ca0139e245c461bbda1f67e72aa9eb, type: 3}
+  - {fileID: 3432685017139329929, guid: 2d0d3ba929e2844d88a99ea01ab53d83, type: 3}
+  - {fileID: 599963194599843366, guid: 07089759f6ef2409883f81b9afeb4367, type: 3}
   bigObjects:
-  - {fileID: 21300000, guid: f9975a9383db1bc4bab800f4e00e1036, type: 3}
-  - {fileID: 21300000, guid: 044cc278c366ee844a4542098b42f4f5, type: 3}
-  - {fileID: 21300000, guid: db4759a5319f0ac4c997dcb0a09e2b47, type: 3}
+  - {fileID: 5982814877598059779, guid: b7d42208ae79b4376a0e4109ba6f586b, type: 3}
+  - {fileID: 4984118000599633861, guid: 8089b8a3fe3a8407fb94854937c26789, type: 3}
+  - {fileID: 6626251683446227624, guid: fc7dc3355ebb74f54b7a75509f756098, type: 3}
+  - {fileID: 6158912104798428459, guid: 4537aca45d63f4c4a9d64e60dfceeffc, type: 3}
+  - {fileID: 1450530367646692869, guid: b88478702eb334580bff337cd798909c, type: 3}
   distFromFerret: 15
   timer: 0
   finishLine: {fileID: 1223530005}
@@ -1787,7 +1787,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 3.8726807, y: 56.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2136,7 +2136,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -97
+  m_SortingOrder: -95
   m_Sprite: {fileID: 21300000, guid: 1c37ead20231a8544b4e9bb8173283e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

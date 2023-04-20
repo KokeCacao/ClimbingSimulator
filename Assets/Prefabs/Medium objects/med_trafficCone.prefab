@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4600218329771351190}
   - component: {fileID: 3282225038282647209}
   - component: {fileID: 4826164171566344667}
+  - component: {fileID: -6575132004464493759}
   m_Layer: 0
   m_Name: med_trafficCone
   m_TagString: Untagged
@@ -276,3 +277,24 @@ PolygonCollider2D:
       - {x: 0.41, y: -4.705}
       - {x: 0.65999997, y: -4.6349998}
       - {x: 0.81, y: -4.595}
+--- !u!50 &-6575132004464493759
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970673614568909233}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
