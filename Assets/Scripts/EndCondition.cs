@@ -5,18 +5,12 @@ using UnityEngine;
 public class EndCondition : MonoBehaviour
 {
     [SerializeField]
-    private GameObject lid;
+    private GameObject Trophy;
 
     [SerializeField]
-    private float lidClosingTime = 4f;
+    private float trophyHeight = -10f;
 
-    [SerializeField]
-    private float initLidX = -10f;
-
-    private bool lidClosed = false;
-    
-    [SerializeField]
-    private GameObject BlackMask;
+    private bool trophyTouched = false;
 
     [SerializeField]
     private GameObject ferret;
@@ -31,38 +25,30 @@ public class EndCondition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BlackMask.GetComponent<SpriteRenderer>().color = new Color (0,0,0,0);
+        
     }
 
-    void CloseLid(){
-        float lidClosingRate = Time.deltaTime*lidClosingTime;
-        float lidX = lid.transform.position.x + lidClosingRate;
-        float lidY = lid.transform.position.y;
-        lid.transform.position = new Vector2 (lidX, lidY);
-        if (lidX >= 0f){
-            lidClosed = true;
-        }
-        float alphaChange = Mathf.Abs(1/(((float)initLidX)/((float)lidClosingRate)));
-        Color newColor = BlackMask.GetComponent<SpriteRenderer>().color + new Color (0, 0, 0, alphaChange);
-        BlackMask.GetComponent<SpriteRenderer>().color = newColor;
-    }
-
-    void SewerEndCondition(){
+    public bool touchedTrophy(){ // change code to if touched trophy
         if ((gameManager.players).Count > 0){
             ferret = (GameObject)(gameManager.players[0]._body);
-            if (ferret.transform.position.y >= finishLine.transform.position.y || Input.GetKey("down")){
-                if (!lidClosed){
-                    CloseLid();
-                }
-            } 
-        }  
+            if (ferret.transform.position.y >= finishLine.transform.position.y){
+                return true;
+            }
+        }
+        return false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        SewerEndCondition();
+        if ((gameManager.players).Count > 0){
+            ferret = (GameObject)(gameManager.players[0]._body);
+            //if grabbed trophy
+            if (touchedTrophy()){
+                
+            } 
+        }  
        
     }
 

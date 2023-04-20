@@ -90,6 +90,8 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public GameObject leftIndicator;
   [HideInInspector] public GameObject rightIndicator;
 
+  public EndCondition endCondition;
+
   private Vector3 Divide(Vector3 a, Vector3 b)
   {
     return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
@@ -136,6 +138,10 @@ public class PlayerManager : MonoBehaviour
       deviceIndex = context.control.device.deviceId;
       return true;
     }
+    //if player wins return false to deactivate controller input
+    // if (endCondition.touchedTrophy()){
+    //   return false;
+    // }
     return deviceIndex == context.control.device.deviceId;
   }
 

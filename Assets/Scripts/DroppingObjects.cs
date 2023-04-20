@@ -105,7 +105,7 @@ public class DroppingObjects : MonoBehaviour
                     dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
                     // dropObj.GetComponent<SpriteRenderer>().sprite = mediumObjects[Random.Range(0, numMediumObj)];
                 }
-                if ((backgroundheight*(2f/3f) < ferretY )&& (seconds % 10 == 0) && (prevseconds != seconds)){
+                if ((backgroundheight*(2f/3f) < ferretY ) && (ferretY < backgroundheight) && (seconds % 10 == 0) && (prevseconds != seconds)){
                     //choose object to drop from small objects list to instantiate
                     int LObjectIndex = Random.Range(0,numBigObj);
                     GameObject dropObj = Instantiate(bigObjects[LObjectIndex]);
@@ -119,7 +119,7 @@ public class DroppingObjects : MonoBehaviour
                 prevseconds = seconds;
 
             }
-
+            // keep track of all objects and destroy once they get past the bottom
         }
 
         
