@@ -1666,7 +1666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684393510}
   m_Layer: 0
-  m_Name: Minimap
+  m_Name: MinimapObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
