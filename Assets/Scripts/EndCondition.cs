@@ -21,6 +21,9 @@ public class EndCondition : MonoBehaviour
     [SerializeField]
     public GameManager gameManager;
 
+    [SerializeField]
+    public CanGrabTrophy canGrabTrophy;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +31,17 @@ public class EndCondition : MonoBehaviour
         
     }
 
+
     public bool touchedTrophy(){ // change code to if touched trophy
         if ((gameManager.players).Count > 0){
-            ferret = (GameObject)(gameManager.players[0]._body);
-            if (ferret.transform.position.y >= finishLine.transform.position.y){
+            PlayerManager player = gameManager.players[0];
+
+            if (canGrabTrophy.leftGrabTrophy == true){
+                player.OnLeftGrabEvent();
+                return true;
+            }
+            if (canGrabTrophy.rightGrabTrophy == true){
+                player.OnRightGrabEvent();
                 return true;
             }
         }

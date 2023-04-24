@@ -313,6 +313,10 @@ public class PlayerManager : MonoBehaviour
     _rightRadiusRigidbody = _rightRadius.GetComponent<Rigidbody2D>();
     _rightHandRigidbody = _rightHand.GetComponent<Rigidbody2D>();
 
+    //add tags to hands (for collisions)
+    _leftHand.tag = "leftHand";
+    _rightHand.tag = "rightHand";
+
     Debug.Assert(_worldRigidbody != null);
     Debug.Assert(_leftHumerusRigidbody != null);
     Debug.Assert(_leftRadiusRigidbody != null);
