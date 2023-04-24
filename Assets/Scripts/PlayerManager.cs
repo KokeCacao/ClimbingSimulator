@@ -269,7 +269,7 @@ public class PlayerManager : MonoBehaviour
     Debug.Assert(_virtualRightAim != null);
 
     // get children game objects of _player
-    _mainMenu = GameObject.Find("MainMenu").GetComponent<MainMenu>();
+    _mainMenu = Resources.FindObjectsOfTypeAll<MainMenu>()[0].gameObject.GetComponent<MainMenu>();
     _body = _player.transform.Find("Body").gameObject;
     _leftHumerus = _body.transform.Find("LeftHumerus").gameObject;
     _leftRadius = _body.transform.Find("LeftRadius").gameObject;
