@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
   [SerializeField] private GameObject _rightAim;
   [SerializeField] private Vector2 _virtualLeftAim;
   [SerializeField] private Vector2 _virtualRightAim;
-  [SerializeField] private Camera _camera;
+  [SerializeField] public Camera _camera;
 
   // Sprites
   [SerializeField] private Sprite[] _handReleaseSpriteLeft;
@@ -46,6 +46,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] private GameObject _rightRadius;
   [HideInInspector] private GameObject _rightHand;
   [HideInInspector] public GameObject _body;
+  [HideInInspector] public GameObject _trophy;
 
   [HideInInspector] private Rigidbody2D _worldRigidbody;
   [HideInInspector] private Rigidbody2D _leftHumerusRigidbody;
@@ -54,6 +55,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] private Rigidbody2D _rightHumerusRigidbody;
   [HideInInspector] private Rigidbody2D _rightRadiusRigidbody;
   [HideInInspector] private Rigidbody2D _rightHandRigidbody;
+  [HideInInspector] private Rigidbody2D _trophyRigidbody;
 
 
   // These component are automatically based on above
@@ -140,11 +142,19 @@ public class PlayerManager : MonoBehaviour
       Debug.Log("New device detected");
       deviceIndex = context.control.device.deviceId;
       return true;
+      //if player wins return false to deactivate controller input
+      
     }
-    //if player wins return false to deactivate controller input
-    // if (endCondition.touchedTrophy()){
-    //   return false;
+    // if (deviceIndex == context.control.device.deviceId){
+    //   if (endCondition.touchedTrophy()){
+    //     return false;
+    //   }
     // }
+    // Debug.Assert(endCondition != null);
+    // bool returnval = deviceIndex == context.control.device.deviceId && !endCondition.touchedTrophy;
+    if (endCondition.touchedTrophy){
+      return false;
+    }
     return deviceIndex == context.control.device.deviceId;
   }
 
@@ -168,17 +178,39 @@ public class PlayerManager : MonoBehaviour
 
     // if grabbing, add a hinge joint at hand position
     GameObject grabbed = _gameManager.positionRandomization.canGrab(_leftHand.transform.position);
-    if (leftGrab && grabbed != null)
+    GameObject trophy = endCondition.touchingTrophy(false);
+    if (trophy != null){
+      grabbed = trophy;
+      // grabbed_trophy
+    }
+    
+    if ((leftGrab && grabbed != null)||(grabbed == trophy && grabbed != null))
     {
       if (_leftHandJoint == null)
       {
         _leftHandJoint = _leftHand.AddComponent<HingeJoint2D>();
       }
-      Vector3 grabbingPosition = CHEATING ? grabbed.transform.position : _leftHand.transform.position;
+      Vector3 grabbingPosition;
+      if (grabbed.tag == "rock"){
+        grabbingPosition = CHEATING ? grabbed.transform.position : _leftHand.transform.position;
+      }
+      else {
+        Debug.Assert(grabbed.tag == "trophy");
+        grabbingPosition = _leftHand.transform.position;
+      }
+      
       _leftHandJoint.enabled = true;
-      _leftHandJoint.connectedBody = _worldRigidbody;
-      _leftHandJoint.anchor = Vector2.zero;
-      _leftHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
+      if (grabbed.tag == "trophy"){
+        _leftHandJoint.connectedBody = _trophyRigidbody;
+        _leftHandJoint.anchor = Vector2.zero;
+        _leftHandJoint.connectedAnchor = Divide((grabbingPosition - _trophyRigidbody.transform.position), _trophyRigidbody.transform.lossyScale);
+      }
+      else{
+        _leftHandJoint.connectedBody = _worldRigidbody;
+        _leftHandJoint.anchor = Vector2.zero;
+        _leftHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
+      }
+
       _leftHandJoint.autoConfigureConnectedAnchor = false;
       _leftHandJoint.useLimits = false;
       _leftHandJoint.useMotor = false;
@@ -211,17 +243,38 @@ public class PlayerManager : MonoBehaviour
 
     // if grabbing, add a hinge joint at hand position
     GameObject grabbed = _gameManager.positionRandomization.canGrab(_rightHand.transform.position);
-    if (rightGrab && grabbed != null)
+    GameObject trophy = endCondition.touchingTrophy(true);
+    if (trophy != null){
+      grabbed = trophy;
+    }
+
+    if ((rightGrab && grabbed != null)||(grabbed == trophy && grabbed != null))
     {
       if (_rightHandJoint == null)
       {
         _rightHandJoint = _rightHand.AddComponent<HingeJoint2D>();
       }
-      Vector3 grabbingPosition = CHEATING ? grabbed.transform.position : _rightHand.transform.position;
+      Vector3 grabbingPosition;
+      if (grabbed.tag == "rock"){
+        grabbingPosition = CHEATING ? grabbed.transform.position : _rightHand.transform.position;
+      }
+      else {
+        Debug.Assert(grabbed.tag == "trophy");
+        grabbingPosition = _rightHand.transform.position;
+      }
+      
       _rightHandJoint.enabled = true;
-      _rightHandJoint.connectedBody = _worldRigidbody;
-      _rightHandJoint.anchor = Vector2.zero;
-      _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
+
+      if (grabbed.tag == "trophy"){
+        _rightHandJoint.connectedBody = _trophyRigidbody;
+        _rightHandJoint.anchor = Vector2.zero;
+        _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _trophyRigidbody.transform.position), _trophyRigidbody.transform.lossyScale);
+      }
+      else{
+        _rightHandJoint.connectedBody = _worldRigidbody;
+        _rightHandJoint.anchor = Vector2.zero;
+        _rightHandJoint.connectedAnchor = Divide((grabbingPosition - _worldRigidbody.transform.position), _worldRigidbody.transform.lossyScale);
+      }
       _rightHandJoint.autoConfigureConnectedAnchor = false;
       _rightHandJoint.useLimits = false;
       _rightHandJoint.useMotor = false;
@@ -270,6 +323,8 @@ public class PlayerManager : MonoBehaviour
 
     // get children game objects of _player
     _mainMenu = Resources.FindObjectsOfTypeAll<MainMenu>()[0].gameObject.GetComponent<MainMenu>();
+    endCondition = Resources.FindObjectsOfTypeAll<EndCondition>()[0].gameObject.GetComponent<EndCondition>();
+    _trophy = GameObject.Find("trophy");
     _body = _player.transform.Find("Body").gameObject;
     _leftHumerus = _body.transform.Find("LeftHumerus").gameObject;
     _leftRadius = _body.transform.Find("LeftRadius").gameObject;
@@ -312,6 +367,7 @@ public class PlayerManager : MonoBehaviour
     _rightHumerusRigidbody = _rightHumerus.GetComponent<Rigidbody2D>();
     _rightRadiusRigidbody = _rightRadius.GetComponent<Rigidbody2D>();
     _rightHandRigidbody = _rightHand.GetComponent<Rigidbody2D>();
+    _trophyRigidbody = _trophy.GetComponent<Rigidbody2D>();
 
     //add tags to hands (for collisions)
     _leftHand.tag = "leftHand";
@@ -417,7 +473,11 @@ public class PlayerManager : MonoBehaviour
     // }
 
     // camera follow
-    _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
+    if (!endCondition.transformed){
+      _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
+    } else{
+      _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, -10);
+    }
     _camera.orthographicSize = 7.0f;
   }
 

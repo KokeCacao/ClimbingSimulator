@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 
 public class Minimap : MonoBehaviour
@@ -21,8 +20,7 @@ public class Minimap : MonoBehaviour
     [SerializeField]
     private GameObject MinimapO;
 
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
+    
 
     [SerializeField]
     private GameObject canvasMinimap;
@@ -57,10 +55,10 @@ public class Minimap : MonoBehaviour
         //Vector2 Head2pos = new Vector2 (Head2.transform.position.x, head2y);
         Head.transform.position = Head1pos;
 
-        scoreText.text = ((int)((head1y/backgroundheight)*100)).ToString() + "%";
-        float textposy = (head1y/backgroundheight)*canvasMinimapH + lowerOffset;
-        Vector2 textpos = new Vector2 (scoreText.transform.position.x, textposy);
-        scoreText.transform.position = textpos;
+        
+        // float textposy = (head1y/backgroundheight)*canvasMinimapH + lowerOffset;
+        // Vector2 textpos = new Vector2 (scoreText.transform.position.x, textposy);
+        // scoreText.transform.position = textpos;
         //Head2.transform.position = Head2pos;
     }
 }

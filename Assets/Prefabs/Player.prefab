@@ -87,6 +87,7 @@ MonoBehaviour:
   playerIndex: 0
   leftIndicator: {fileID: 0}
   rightIndicator: {fileID: 0}
+  endCondition: {fileID: 0}
 --- !u!114 &8357164010986741288
 MonoBehaviour:
   m_ObjectHideFlags: 0
