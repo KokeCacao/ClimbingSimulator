@@ -112,32 +112,32 @@ public class WaterManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    UpdateWaterLevel();
+    // UpdateWaterLevel();
 
-    // Debug.Log("Water Level: " + waterLevel);
+    // // Debug.Log("Water Level: " + waterLevel);
 
-    // floater logics
-    for (int i = 0; i < floater.Count; i++)
-    {
-      Rigidbody2D rb = floater[i];
-      float distance = rb.transform.position.y - waterLevel;
-      // Debug.Log("Floater: " + rb.name + " is " + distance + " units away from water level");
-      // Debug.Log("Floater: " + rb.name + " has position: " + rb.transform.position.y);
-      if (distance > 0)
-      {
-        rb.drag = floaterOriginalDrag[i];
-      }
-      else
-      {
-        rb.drag = waterDrag;
-        rb.AddForce(new Vector2(0, buoyancyForce * Mathf.Clamp(-distance, 0, buoyancyDistance)));
-        // Debug.Log("Floater: " + rb.name + " is floating");
-      }
-    }
+    // // floater logics
+    // for (int i = 0; i < floater.Count; i++)
+    // {
+    //   Rigidbody2D rb = floater[i];
+    //   float distance = rb.transform.position.y - waterLevel;
+    //   // Debug.Log("Floater: " + rb.name + " is " + distance + " units away from water level");
+    //   // Debug.Log("Floater: " + rb.name + " has position: " + rb.transform.position.y);
+    //   if (distance > 0)
+    //   {
+    //     rb.drag = floaterOriginalDrag[i];
+    //   }
+    //   else
+    //   {
+    //     rb.drag = waterDrag;
+    //     rb.AddForce(new Vector2(0, buoyancyForce * Mathf.Clamp(-distance, 0, buoyancyDistance)));
+    //     // Debug.Log("Floater: " + rb.name + " is floating");
+    //   }
+    // }
 
-    foreach (Rigidbody2D rb in sinker)
-    {
-      rb.AddForce(new Vector2(0, -1));
-    }
+    // foreach (Rigidbody2D rb in sinker)
+    // {
+    //   rb.AddForce(new Vector2(0, -1));
+    // }
   }
 }

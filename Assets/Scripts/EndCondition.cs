@@ -109,7 +109,7 @@ public class EndCondition : MonoBehaviour
         if ((gameManager.players).Count > 0){
             ferret = (GameObject)(gameManager.players[0]._body);
 
-            if (!touchedTrophy){
+            if (!touchedTrophy && (ferret.transform.position.y > -10)){
                 timer += Time.deltaTime;
             }
             int minutes = (int)(timer / 60);

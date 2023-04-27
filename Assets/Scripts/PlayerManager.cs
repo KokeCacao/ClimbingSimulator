@@ -424,7 +424,7 @@ public class PlayerManager : MonoBehaviour
       rigidBody.mass = IK_MASS_BODY;
       rigidBody.angularDrag = IK_ANGULAR_DRAG_BODY;
 
-      _gameManager.waterManager.AddFloater(rigidBody);
+      //_gameManager.waterManager.AddFloater(rigidBody);
     }
 
     // add itself to GameManager
@@ -481,10 +481,12 @@ public class PlayerManager : MonoBehaviour
     // }
 
     // camera follow
-    if (!endCondition.transformed){
+    if (!endCondition.transformed && !(_body.transform.position.y < -10f)){
       _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
     } else{
-      _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, -10);
+      if ((endCondition.newObj != null) && (!(endCondition.newObj.transform.position.y < -10f))){
+        _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, -10);
+      }
     }
     _camera.orthographicSize = 7.0f;
   }
