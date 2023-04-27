@@ -7,14 +7,17 @@ public class MainMenu : MonoBehaviour
 {
   GameObject menu;
   GameObject minimap;
+  GameObject minimapCanvas;
 
   public void Awake()
   {
     menu = GameObject.Find("Menu");
     minimap = GameObject.Find("MinimapObject");
+    minimapCanvas = GameObject.Find("MinimapCanvas");
     
     menu.SetActive(true);
     minimap.SetActive(false);
+    minimapCanvas.SetActive(false);
   }
 
   public void PlayGame()
@@ -28,6 +31,7 @@ public class MainMenu : MonoBehaviour
     // go to game when player in menu
     menu.SetActive(false);
     minimap.SetActive(true);
+    minimapCanvas.SetActive(true);
   }
 
   public void EnableMenu()
@@ -40,6 +44,7 @@ public class MainMenu : MonoBehaviour
     }
     menu.SetActive(true);
     minimap.SetActive(false);
+    minimapCanvas.SetActive(false);
     Scene scene = SceneManager.GetActiveScene();
     SceneManager.LoadScene(scene.name);
   }

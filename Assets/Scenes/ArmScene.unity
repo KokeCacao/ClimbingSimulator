@@ -392,7 +392,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 477983325}
-  - {fileID: 2011453838}
   - {fileID: 1643224390}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1586,6 +1585,7 @@ MonoBehaviour:
   - {fileID: 1450530367646692869, guid: b88478702eb334580bff337cd798909c, type: 3}
   touchedTrophy: 0
   trophyHalo: {fileID: 8331918111593698559, guid: 9552f333fe9c445f59a768c0f5fe9230, type: 3}
+  newObj: {fileID: 0}
   haloSpinTime: 3
   transformed: 0
   timer: 0
@@ -1967,7 +1967,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 292927115}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2188,6 +2188,7 @@ Transform:
   - {fileID: 1641722930}
   - {fileID: 228647277}
   - {fileID: 2146607694}
+  - {fileID: 2011453838}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2384,12 +2385,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011453835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -378.2, y: -191.9, z: -7.6408787}
-  m_LocalScale: {x: 0.76408786, y: 0.76408786, z: 0.76408786}
+  m_LocalPosition: {x: 4.040001, y: -22.797798, z: -18.33811}
+  m_LocalScale: {x: 1.8338109, y: 1.8338109, z: 1.8338109}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 292927115}
-  m_RootOrder: 1
+  m_Father: {fileID: 1684393510}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &2011453839
 AudioListener:
