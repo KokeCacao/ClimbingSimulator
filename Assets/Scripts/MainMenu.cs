@@ -40,6 +40,8 @@ public class MainMenu : MonoBehaviour
     }
     menu.SetActive(true);
     minimap.SetActive(false);
+    Scene scene = SceneManager.GetActiveScene();
+    SceneManager.LoadScene(scene.name);
   }
 
   public void QuitGame()
