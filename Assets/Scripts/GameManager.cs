@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
   [SerializeField] public PositionRandomization positionRandomization;
   [SerializeField] public Minimap minimap;
   [SerializeField] public WaterManager waterManager;
+  private bool playerJoined = false;
 
   public List<PlayerManager> players;
 
   void Awake()
   {
   }
+
+  
 
   public void OnPlayerJoined(PlayerInput playerInput)
   {
@@ -51,14 +54,26 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
+    if (players.Count > 0 && !playerJoined){
+      Debug.Log("player.Count > 0");
+      // gameObject ferret = players[0]._body;
+      // gameObject nearestRock = getNearestRock(ferret);
+      PlayerManager player = players[0];
+      player.justJoined = true;
+      //player.OnLeftGrabEvent();
+      playerJoined = true;
+    }
     GameObject[] rocks = positionRandomization.getRocks();
       foreach (PlayerManager player in players)
       {
         Vector2 leftHandPos = player.getHandPosition(true);
-        Vector2 rightHandPos = player.getHandPosition(false);
+        Vector2 rightHandPos = player.getHandPosition(false); 
         
         GameObject leftRock = positionRandomization.canGrab(leftHandPos);
         GameObject rightRock = positionRandomization.canGrab(rightHandPos);
+        if (player.justJoined){
+          leftRock = rocks[20];
+        }
         if (leftRock != null) {
           if (player.leftIndicator == null) {
             player.leftIndicator = Instantiate(indicatorPrefab);

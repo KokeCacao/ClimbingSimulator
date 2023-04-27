@@ -95,6 +95,8 @@ public class PlayerManager : MonoBehaviour
 
   public EndCondition endCondition;
 
+  [HideInInspector] public bool  justJoined;
+
   private Vector3 Divide(Vector3 a, Vector3 b)
   {
     return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
@@ -119,7 +121,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     Debug.Log("Player " + playerInput.playerIndex + " joined");
-    playerIndex = playerInput.playerIndex;
+    playerIndex = playerInput.playerIndex; 
     deviceIndex = -1;
 
     controls.ActionMap.LeftGrab.performed += ctx => OnLeftGrabEvent(ctx, playerInput.playerIndex);
@@ -133,6 +135,7 @@ public class PlayerManager : MonoBehaviour
     controls.ActionMap.Start.performed += ctx => _mainMenu.DisableMenu();
     controls.ActionMap.Back.performed += ctx => _mainMenu.EnableMenu();
     controls.Enable();
+    
   }
 
   private bool isValidInput(InputAction.CallbackContext context)
@@ -142,21 +145,17 @@ public class PlayerManager : MonoBehaviour
       Debug.Log("New device detected");
       deviceIndex = context.control.device.deviceId;
       return true;
-      //if player wins return false to deactivate controller input
-      
     }
-    // if (deviceIndex == context.control.device.deviceId){
-    //   if (endCondition.touchedTrophy()){
-    //     return false;
-    //   }
-    // }
-    // Debug.Assert(endCondition != null);
-    // bool returnval = deviceIndex == context.control.device.deviceId && !endCondition.touchedTrophy;
+    
     if (endCondition.touchedTrophy){
       return false;
     }
     return deviceIndex == context.control.device.deviceId;
   }
+
+  // private GameObject getNearestRock(){
+    
+  // }
 
   // Now start Event Handlers
   public void ReleaseLeftGrab()
@@ -182,6 +181,11 @@ public class PlayerManager : MonoBehaviour
     if (trophy != null){
       grabbed = trophy;
       // grabbed_trophy
+    }
+    if (justJoined){
+      GameObject[] rocks = _gameManager.positionRandomization.getRocks();
+      leftGrab = true;
+      grabbed = rocks[20];
     }
     
     if ((leftGrab && grabbed != null)||(grabbed == trophy && grabbed != null))
@@ -237,6 +241,7 @@ public class PlayerManager : MonoBehaviour
   }
   public void OnRightGrabEvent()
   {
+
     // update _rightAim with red color
     _rightAim.GetComponent<SpriteRenderer>().color = rightGrab ? Color.red : Color.gray;
     _rightHand.GetComponentInChildren<SpriteRenderer>().sprite = rightGrab ? _handGrabSpriteRight[playerIndex % _handGrabSpriteRight.Length] : _handReleaseSpriteRight[playerIndex % _handReleaseSpriteRight.Length];
@@ -250,6 +255,9 @@ public class PlayerManager : MonoBehaviour
 
     if ((rightGrab && grabbed != null)||(grabbed == trophy && grabbed != null))
     {
+      if (justJoined){
+        justJoined = false;
+      }
       if (_rightHandJoint == null)
       {
         _rightHandJoint = _rightHand.AddComponent<HingeJoint2D>();
