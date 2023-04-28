@@ -52,12 +52,12 @@ public class GameManager : MonoBehaviour
   {
   }
 
+
   void Update()
   {
     if (players.Count > 0 && !playerJoined){
       Debug.Log("player.Count > 0");
       // gameObject ferret = players[0]._body;
-      // gameObject nearestRock = getNearestRock(ferret);
       PlayerManager player = players[0];
       player.justJoined = true;
       //player.OnLeftGrabEvent();
@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
         GameObject leftRock = positionRandomization.canGrab(leftHandPos);
         GameObject rightRock = positionRandomization.canGrab(rightHandPos);
         if (player.justJoined){
-          leftRock = rocks[20];
+          int nearestRock = positionRandomization.getNearestRock();
+          leftRock = rocks[nearestRock];
         }
         if (leftRock != null) {
           if (player.leftIndicator == null) {

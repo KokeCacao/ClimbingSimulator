@@ -53,8 +53,23 @@ public class PositionRandomization : MonoBehaviour
     return null;
   }
 
+  
   public GameObject[] getRocks() {
     return GameObject.FindGameObjectsWithTag(ROCK_TAG);
+  }
+
+  public int getNearestRock(){
+    float nearestdist = 100f;
+    int nearestrock = 0;
+    GameObject[] rocks = getRocks();
+    for (int i = 0; i < rocks.Length; i++){
+      float rockdist = Vector2.Distance((new Vector2(0,0)), (rocks[i]).transform.position);
+      if(rockdist < nearestdist){
+        nearestdist = rockdist;
+        nearestrock = i;
+      }
+    }
+    return nearestrock;
   }
 
   private void OnEnable() {

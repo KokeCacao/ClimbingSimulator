@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public GameObject rightIndicator;
 
   public EndCondition endCondition;
+  [HideInInspector] public float gameOverLine = -10f;
 
   [HideInInspector] public bool  justJoined;
 
@@ -184,8 +185,9 @@ public class PlayerManager : MonoBehaviour
     }
     if (justJoined){
       GameObject[] rocks = _gameManager.positionRandomization.getRocks();
+      int nearestRock = _gameManager.positionRandomization.getNearestRock();
       leftGrab = true;
-      grabbed = rocks[20];
+      grabbed = rocks[nearestRock];
     }
     
     if ((leftGrab && grabbed != null)||(grabbed == trophy && grabbed != null))
@@ -481,11 +483,11 @@ public class PlayerManager : MonoBehaviour
     // }
 
     // camera follow
-    if (!endCondition.transformed && !(_body.transform.position.y < -10f)){
-      _camera.transform.position = new Vector3(0, _body.transform.position.y, -10);
+    if (!endCondition.transformed && !(_body.transform.position.y < gameOverLine)){
+      _camera.transform.position = new Vector3(0, _body.transform.position.y, gameOverLine);
     } else{
-      if ((endCondition.newObj != null) && (!(endCondition.newObj.transform.position.y < -10f))){
-        _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, -10);
+      if ((endCondition.newObj != null) && (!(endCondition.newObj.transform.position.y < gameOverLine))){
+        _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, gameOverLine);
       }
     }
     _camera.orthographicSize = 7.0f;
