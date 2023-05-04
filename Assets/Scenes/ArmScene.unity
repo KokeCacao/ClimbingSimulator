@@ -2382,7 +2382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: ee3b3edeae758298b8f0bf65f7e028e1, type: 2}
+  sharedProfile: {fileID: 11400000, guid: c4110081fd7cd8f3cb153b34f5bf4bde, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -3355,7 +3355,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -92
   m_Sprite: {fileID: 21300000, guid: 266534691de3f4ee1a1a5ace948a2f51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3439,7 +3439,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -92
   m_Sprite: {fileID: 21300000, guid: e63b1cecfb1274e7cbff797f5403e4a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
