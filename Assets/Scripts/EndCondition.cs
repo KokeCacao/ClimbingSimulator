@@ -70,7 +70,7 @@ public class EndCondition : MonoBehaviour
     private TextMeshProUGUI endConditionText4;
 
     private bool endConditionObject = false;
-
+    public float gameOverLine = -15f;
 
     // Start is called before the first frame update
     void Start()
@@ -159,6 +159,7 @@ public class EndCondition : MonoBehaviour
                     GameObject obj = objectsList[objectIndex];
                     newObj = Instantiate(obj);
                     newObj.transform.position = ferret.transform.position;
+                    newObj.GetComponent<Rigidbody2D>().AddTorque(1);
                     ferret.SetActive(false);
                     transformed = true;
                 }
@@ -171,17 +172,17 @@ public class EndCondition : MonoBehaviour
             }
 
             // text
-            if (!transformed && (ferret.transform.position.y < gameManager.players[0].gameOverLine)){
+            if (!transformed && (ferret.transform.position.y < gameOverLine)){
                 //endConditionText.transform.position = new Vector2(0, gameManager.players[0].gameOverLine);
                 endConditionText1.text = "YOU FAILED";
                 endConditionText2.text = "Time taken";
                 endConditionText3.text = timerText.text;
                 endConditionText4.text = "Press \"esc\" to restart";
             } else {
-                if ((newObj != null) && (newObj.transform.position.y < gameManager.players[0].gameOverLine - 5) && !endConditionObject){
+                if ((newObj != null) && (newObj.transform.position.y < gameOverLine - 5) && !endConditionObject){
                     GameObject transformedobj = Instantiate(newObj);
                     transformedobj.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                    transformedobj.transform.position = new Vector2(0,gameManager.players[0].gameOverLine + 5);
+                    transformedobj.transform.position = new Vector2(0,gameOverLine + 5);
                     endConditionText1.text = "YOU REINCARNATED";
                     //endConditionText1.transform.position = new Vector2(endConditionText1.transform.position.x, endConditionText1.transform.position.y + 10);
                     endConditionText2.text = "Time taken";

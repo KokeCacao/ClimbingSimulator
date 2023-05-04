@@ -93,6 +93,8 @@ public class DroppingObjects : MonoBehaviour
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
                     dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    //dropObj.transform.rotation = Random.rotation;
+                    dropObj.GetComponent<Rigidbody2D>().AddTorque(1);
                     //  dropObj.GetComponent<SpriteRenderer>().sprite = smallObjects[Random.Range(0, numSmallObj)];
                 }
                 if ((backgroundheight*(1f/3f) < ferretY) && (ferretY < backgroundheight*(2f/3f))  && (seconds % 20 == 0) && (prevseconds != seconds)){
@@ -103,6 +105,7 @@ public class DroppingObjects : MonoBehaviour
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
                     dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    dropObj.GetComponent<Rigidbody2D>().AddTorque(1);
                     // dropObj.GetComponent<SpriteRenderer>().sprite = mediumObjects[Random.Range(0, numMediumObj)];
                 }
                 if ((backgroundheight*(2f/3f) < ferretY ) && (ferretY < backgroundheight) && (seconds % 10 == 0) && (prevseconds != seconds)){
@@ -113,6 +116,7 @@ public class DroppingObjects : MonoBehaviour
                     float leftS = Mathf.Max((ferretX - distFromFerret), (-backgroundwidth/2 + 5));
                     float rightS = Mathf.Min((ferretX + distFromFerret), (backgroundwidth/2 - 5));
                     dropObj.transform.position = new Vector2((Random.Range(leftS, rightS)), finishLine.transform.position.y + 20);
+                    dropObj.GetComponent<Rigidbody2D>().AddTorque(1);
                     //dropObj.GetComponent<SpriteRenderer>().sprite = bigObjects[Random.Range(0, numBigObj)];
                 }
 

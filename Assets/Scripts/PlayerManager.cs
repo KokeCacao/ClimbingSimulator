@@ -94,7 +94,7 @@ public class PlayerManager : MonoBehaviour
   [HideInInspector] public GameObject rightIndicator;
 
   public EndCondition endCondition;
-  [HideInInspector] public float gameOverLine = -10f;
+  
 
   [HideInInspector] public bool  justJoined;
 
@@ -483,11 +483,11 @@ public class PlayerManager : MonoBehaviour
     // }
 
     // camera follow
-    if (!endCondition.transformed && !(_body.transform.position.y < gameOverLine)){
-      _camera.transform.position = new Vector3(0, _body.transform.position.y, gameOverLine);
+    if (!endCondition.transformed && !(_body.transform.position.y < endCondition.gameOverLine)){
+      _camera.transform.position = new Vector3(0, _body.transform.position.y, endCondition.gameOverLine);
     } else{
-      if ((endCondition.newObj != null) && (!(endCondition.newObj.transform.position.y < gameOverLine))){
-        _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, gameOverLine);
+      if ((endCondition.newObj != null) && (!(endCondition.newObj.transform.position.y < endCondition.gameOverLine))){
+        _camera.transform.position = new Vector3(0,endCondition.newObj.transform.position.y, endCondition.gameOverLine);
       }
     }
     _camera.orthographicSize = 7.0f;
